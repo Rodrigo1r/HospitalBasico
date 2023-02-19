@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+<!-- Contenido Dinamico   -->
+<main id="main" class="main">
+
+    <!-- Titulo de Pagina -->
+    <div class="pagetitle">
+        <h1>Configuracion de Horarios</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" th:href="@{/home}">Inicio</a></li>
+                <li class="breadcrumb-item">Tabla</li>
+                <li class="breadcrumb-item active">Datos</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 th:if="${#lists.isEmpty(lista)}">No se han configurado horarios de trabajo</h4>
+
+                      
+                        <a class="btn btn-primary"
+                           th:if="${#lists.isEmpty(lista)}" th:href="@{/horario/configurar}">Configurar horarios</a>
+
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+
+
+                            <thead>
+                            <tr>
+
+
+                                <th scope="col">Dia Inicial</th>
+                                <th scope="col">Dia Final</th>
+                                <th scope="col">Tiempo Cita</th>
+                                <th scope="col">Hora Inicio</th>
+                                <th scope="col">Hora Fin</th>
+                                <th scope="col">Hora Inicio</th>
+                                <th scope="col">Hora fin</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="configurar : ${lista}">
+
+                                <td th:text="${configurar.dia_inicio_semana}">
+                                <td th:text="${configurar.dia_fin_semana}">
+                                <td th:text="${configurar.duracion_cita}">
+                                <td th:text="${configurar.hora_inicio_dia}">
+                                <td th:text="${configurar.hora_fin_dia}">
+                                <td th:text="${configurar.hora_inicio_tarde}">
+                                <td th:text="${configurar.hora_fin_tarde}">
+
+                                <td><a class="btn btn-info"
+                                       th:href="@{/horario/editar/{id}(id=${configurar.id})}">Editar</a></td>
+                                <td><a class="btn btn-danger" id="alert_demo_4"
+                                       sec:authorize="hasAuthority('ADMINISTRADOR')"
+                                       th:href="@{/horario/eliminar/{id}(id=${configurar.id})}"
+                                > Eliminar </a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+</html>

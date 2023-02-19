@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+
+<body>
+
+	<!-- ======= Header ======= -->
+	<header th:replace="plantilla/plantilla-menu :: header"></header>
+	<!-- End Header -->
+
+	<!-- ======= Sidebar ======= -->
+<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+	<!-- End Sidebar-->
+
+	<!-- Contenido Dinamico-->
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Información general</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item active">Gráficas</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section dashboard">
+			<div class="row">
+
+				<!-- Left side columns -->
+				<div class="col-lg-8">
+					<div class="row">
+
+						<div class="alert alert-info alert-dismissible fade show" role="alert" th:if="${sucess != null}"><a th:sucess="${info}"> </a>>
+							A simple info alert—check it out!
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+
+						<!-- Inicio Citas -->
+						<div class="col-xxl-4 col-md-6">
+							<div class="card info-card sales-card">
+
+								<div class="filter">
+									<a class="icon" href="#" data-bs-toggle="dropdown"><i
+										class="bi bi-three-dots"></i></a>
+									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+										<li class="dropdown-header text-start">
+											<h6>Filter</h6>
+										</li>
+
+										<li><a class="dropdown-item" href="#">Hoy</a></li>
+										<li><a class="dropdown-item" href="#">Este mes</a></li>
+										<li><a class="dropdown-item" href="#">Este año</a></li>
+									</ul>
+								</div>
+
+								<div class="card-body">
+									<h5 class="card-title">
+										Citas <span>| Hoy</span>
+									</h5>
+
+									<div class="d-flex align-items-center">
+										<div
+											class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+											<i class="bi bi-journal-medical"></i>
+										</div>
+										<div class="ps-3">
+											<h6 th:text="${citasHoy}" ></h6>
+											<span th:text="${porcentaje} + '%'" th:class="'small pt-1 fw-bold ' + ${porcentaje > 0 ? 'text-success'  : 'text-danger'}"></span> <span
+												class="text-muted small pt-2 ps-1" th:text="${porcentaje >0 ? 'aumento' : 'disminución'}"></span>
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<!-- Fin Citas Pacientes -->
+
+
+
+						<!-- Citas Mes Card -->
+						<div class="col-xxl-4 col-md-6">
+							<div class="card info-card revenue-card">
+
+								<div class="filter">
+									<a class="icon" href="#" data-bs-toggle="dropdown"><i
+										class="bi bi-three-dots"></i></a>
+									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+										<li class="dropdown-header text-start">
+											<h6>Filter</h6>
+										</li>
+
+										<li><a class="dropdown-item" href="#">Today</a></li>
+										<li><a class="dropdown-item" href="#">This Month</a></li>
+										<li><a class="dropdown-item" href="#">This Year</a></li>
+									</ul>
+								</div>
+
+								<div class="card-body">
+									<h5 class="card-title">
+										Citas<span>| Este mes</span>
+									</h5>
+
+									<div class="d-flex align-items-center">
+										<div
+											class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+											<i class="bi bi-journal-medical"></i>
+										</div>
+										<div class="ps-3">
+											<h6 th:text="${citasMesActual}"></h6>
+											<span th:text="${porcentajeMes} + '%'" th:class="'small pt-1 fw-bold ' + ${porcentajeMes > 0 ? 'text-success'  : 'text-danger'}"></span> <span
+												class="text-muted small pt-2 ps-1" th:text="${porcentajeMes >0 ? 'aumento' : 'disminución'}"></span>
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<!-- End Citas Mes Card -->
+
+						<!-- Citas año Card -->
+						<div class="col-xxl-4 col-md-6">
+
+							<div class="card info-card customers-card">
+
+								<div class="filter">
+									<a class="icon" href="#" data-bs-toggle="dropdown"><i
+										class="bi bi-three-dots"></i></a>
+									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+										<li class="dropdown-header text-start">
+											<h6>Filter</h6>
+										</li>
+
+										<li><a class="dropdown-item" href="#">Today</a></li>
+										<li><a class="dropdown-item" href="#">This Month</a></li>
+										<li><a class="dropdown-item" href="#">This Year</a></li>
+									</ul>
+								</div>
+
+								<div class="card-body">
+									<h5 class="card-title">
+										Citas <span>| Este año</span>
+									</h5>
+
+									<div class="d-flex align-items-center">
+										<div
+											class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+											<i class="bi bi-journal-medical"></i>
+										</div>
+										<div class="ps-3">
+											<h6 th:text="${citasAnioActual}"></h6>
+											<span  th:text="${porcentajeAnio} + '%'" th:class="'small pt-1 fw-bold ' + ${porcentajeAnio > 0 ? 'text-success'  : 'text-danger'}" ></span>
+											<span class="text-muted small pt-2 ps-1" th:text="${porcentajeAnio >0 ? 'aumento' : 'disminución'}"></span>
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+						<!-- End Citas año Card -->
+
+						<!-- Inicio Tarjeta Atenciones -->
+						<div class="col-xxl-4 col-md-6">
+							<div class="card info-card sales-card">
+
+								<div class="filter">
+									<a class="icon" href="#" data-bs-toggle="dropdown"><i
+											class="bi bi-three-dots"></i></a>
+									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+										<li class="dropdown-header text-start">
+											<h6>Filter</h6>
+										</li>
+
+										<li><a class="dropdown-item" href="#">Hoy</a></li>
+										<li><a class="dropdown-item" href="#">Este mes</a></li>
+										<li><a class="dropdown-item" href="#">Este año</a></li>
+									</ul>
+								</div>
+
+								<div class="card-body">
+									<h5 class="card-title">
+										Atenciones <span>| Hoy</span>
+									</h5>
+
+									<div class="d-flex align-items-center">
+										<div
+												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+											<i class="bi bi-people"></i>
+										</div>
+										<div class="ps-3">
+											<h6 th:text="${atencionHoy}"></h6>
+											<span th:text="${porcAtencion} + '%'" th:class="'small pt-1 fw-bold ' + ${porcAtencion > 0 ? 'text-success'  : 'text-danger'}" ></span> <span
+												class="text-muted small pt-2 ps-1" th:text="${porcAtencion >0 ? 'aumento' : 'disminución'}"></span>
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<!-- Fin Tarjeta Atenciones -->
+
+
+						<!-- Atenciones Mes Card -->
+						<div class="col-xxl-4 col-md-6">
+							<div class="card info-card revenue-card">
+
+								<div class="filter">
+									<a class="icon" href="#" data-bs-toggle="dropdown"><i
+											class="bi bi-people"></i></a>
+									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+										<li class="dropdown-header text-start">
+											<h6>Filter</h6>
+										</li>
+
+										<li><a class="dropdown-item" href="#">Today</a></li>
+										<li><a class="dropdown-item" href="#">This Month</a></li>
+										<li><a class="dropdown-item" href="#">This Year</a></li>
+									</ul>
+								</div>
+
+								<div class="card-body">
+									<h5 class="card-title">
+										Atenciones<span>| Este mes</span>
+									</h5>
+
+									<div class="d-flex align-items-center">
+										<div
+												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+											<i class="bi bi-people"></i>
+										</div>
+										<div class="ps-3">
+											<h6 th:text="${atencionMesActual}"></h6>
+											<span th:text="${porcAtencionMes} + '%'" th:class="'small pt-1 fw-bold ' + ${porcAtencionMes > 0 ? 'text-success'  : 'text-danger'}" ></span> <span
+												class="text-muted small pt-2 ps-1" th:text="${porcAtencionMes >0 ? 'aumento' : 'disminución'}"></span>
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<!-- End Atenciones Mes Card -->
+
+						<!-- Atenciones año Card -->
+						<div class="col-xxl-4 col-md-6">
+
+							<div class="card info-card customers-card">
+
+								<div class="filter">
+									<a class="icon" href="#" data-bs-toggle="dropdown"><i
+											class="bi bi-three-dots"></i></a>
+									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+										<li class="dropdown-header text-start">
+											<h6>Filter</h6>
+										</li>
+
+										<li><a class="dropdown-item" href="#">Today</a></li>
+										<li><a class="dropdown-item" href="#">This Month</a></li>
+										<li><a class="dropdown-item" href="#">This Year</a></li>
+									</ul>
+								</div>
+
+								<div class="card-body">
+									<h5 class="card-title">
+										Atenciones <span>| Este año</span>
+									</h5>
+
+									<div class="d-flex align-items-center">
+										<div
+												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+											<i class="bi bi-people"></i>
+										</div>
+										<div class="ps-3">
+											<h6 th:text="${atencionAnioActual}"></h6>
+											<span th:text="${porcAtencionAnio} + '%'" th:class="'small pt-1 fw-bold ' + ${porcAtencionAnio > 0 ? 'text-success'  : 'text-danger'}"></span> <span
+												class="text-muted small pt-2 ps-1" th:text="${porcAtencionAnio >0 ? 'aumento' : 'disminución'}"></span>
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+						<!-- End Atenciones año Card -->
+
+
+						<!-- Reports -->
+						<div class="col-12">
+							<div class="card">
+
+								<div class="filter">
+									<a class="icon" href="#" data-bs-toggle="dropdown"><i
+										class="bi bi-three-dots"></i></a>
+									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+										<li class="dropdown-header text-start">
+											<h6>Filter</h6>
+										</li>
+
+										<li><a class="dropdown-item" href="#">Today</a></li>
+										<li><a class="dropdown-item" href="#">This Month</a></li>
+										<li><a class="dropdown-item" href="#">This Year</a></li>
+									</ul>
+								</div>
+
+								<div class="card-body">
+									<h5 class="card-title text-center">
+										Ralación Pacientes/Citas/Atenciones <span></span>
+									</h5>
+
+									<!-- Line Chart -->
+									<div id="reportsChart"></div>
+
+									<script th:inline="javascript">
+										var vCitaMes = [[${citaMes}]]
+										var vAtencionMes = [[${atencionMes}]]
+										var vPacienteMes = [[${pacienteMes}]]
+
+										var vCitasActual = [[${citasMesActual}]]
+										var vAtencionesActual = [[${atencionMesActual}]]
+										var vPacientesActual = [[${pacientesMesActual}]]
+										var nombreEspecialidades = [[${nombreEspecialidades}]]
+										var cantidadEspecialidades = [[${cantidadEspecialidades}]]
+
+										var pacienteNombreMes = [[${pacientesNombreMes}]]
+										var pacienteCanridadMes = [[${pacientesCantidadMes}]]
+
+
+									</script>
+
+									<script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new ApexCharts(document.querySelector("#reportsChart"), {
+                        series: [{
+                          name: 'Citas',
+                          data: vCitaMes//[31, 40, 28, 51, 42, 82, 56],
+                        }, {
+                          name: 'Atenciones',
+                          data: vAtencionMes //[11, 32, 45, 32, 34, 42, 41,20]
+                        }, {
+                          name: 'Pacientes',
+                          data: vPacienteMes //[15, 11, 32, 18, 9, 24, 11,14]
+                        }],
+                        chart: {
+                          height: 350,
+                          type: 'area',
+                          toolbar: {
+                            show: false
+                          },
+                        },
+                        markers: {
+                          size: 5
+                        },
+                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                        fill: {
+                          type: "gradient",
+                          gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.3,
+                            opacityTo: 0.4,
+                            stops: [0, 90, 100]
+                          }
+                        },
+                        dataLabels: {
+                          enabled: false
+                        },
+                        stroke: {
+                          curve: 'smooth',
+                          width: 2
+                        },
+                        xaxis: {
+                          //type: 'datetime',
+                          categories: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                        },
+						  yaxis: {
+							  title: {
+								  text: 'Valores'
+							  },
+							  min: 0,
+							  max: 30
+						  },
+
+                      }).render();
+                    });
+                  </script>
+									<!-- End Line Chart -->
+
+								</div>
+
+							</div>
+						</div>
+						<!-- End Reports -->
+
+
+
+					</div>
+				</div>
+				<!-- End Left side columns -->
+
+				<!-- Right side columns -->
+				<div class="col-lg-4">
+
+					<!-- Website Traffic -->
+					<div class="card">
+						<div class="card-body">
+
+
+						<div class="card-body pb-0">
+							<h5 class="card-title">
+								Citas por especialidad <span>| Este año</span>
+							</h5>
+
+							<!-- Pie Chart -->
+							<canvas id="pieChart" style="max-height: 400px;"></canvas>
+							<script>
+								document.addEventListener("DOMContentLoaded", () => {
+									new Chart(document.querySelector('#pieChart'), {
+										type: 'pie',
+										data: {
+											labels:  nombreEspecialidades,// ['Red','Blue', 'Yellow'],
+											datasets: [{
+												label: 'Citas agendadas',
+												data: cantidadEspecialidades, //[300, 50, 100],
+												backgroundColor: [
+													'rgb(255, 99, 132)',
+													'rgb(54, 162, 235)',
+													'rgb(255, 205, 86)'
+												],
+												hoverOffset: 4
+											}]
+										}
+									});
+								});
+							</script>
+							<!-- End Pie CHart -->
+
+
+						</div>
+						</div>
+					</div>
+
+
+					<!-- Website Traffic -->
+					<div class="card">
+						<div class="card-body">
+
+
+							<div class="card-body pb-0">
+								<h5 class="card-title">
+									Pacientes por mes<span></span>
+								</h5>
+
+								<!-- Polar Area Chart -->
+								<canvas id="polarAreaChart" style="max-height: 400px;"></canvas>
+								<script>
+									document.addEventListener("DOMContentLoaded", () => {
+										new Chart(document.querySelector('#polarAreaChart'), {
+											type: 'polarArea',
+											data: {
+												labels: pacienteNombreMes ,//['Red','Green','Yellow', 'Grey', 'Blue'],
+												datasets: [{
+													label: 'Pacientes registrados',
+													data: pacienteCanridadMes,//[11, 16, 7, 3, 14],
+													backgroundColor: [
+														'rgb(255, 99, 132)',
+														'rgb(75, 192, 192)',
+														'rgb(255, 205, 86)',
+														'rgb(201, 203, 207)',
+														'rgb(54, 162, 235)'
+													]
+												}]
+											}
+										});
+									});
+								</script>
+								<!-- End Polar Area Chart -->
+
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				<!-- End Right side columns -->
+
+			</div>
+		</section>
+
+	</main>
+	<!-- End #main -->
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu :: footer"></footer>
+
+</html>

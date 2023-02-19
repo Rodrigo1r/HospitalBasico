@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+<!-- Contenido Dinamico   -->
+<main id="main" class="main">
+
+    <!-- Titulo de Pagina -->
+    <div class="pagetitle">
+        <h1>Listado de Especialidades</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" th:href="@{/home}">Inicio</a></li>
+                <li class="breadcrumb-item">Tabla</li>
+                <li class="breadcrumb-item active">Datos</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+
+
+                        <h3 class="card-header" th:if="${#lists.isEmpty(lista)}">No hay especialidades Registradas</h3>
+
+                        <br>
+                        <a class="btn btn-primary"
+                           th:href="@{/especialidad/registro}">Agregar especialidad</a>
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+                                <th scope="col">Especialidad</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Usuario Creacion</th>
+                                <th scope="col">Fecha Creacion</th>
+                                <th scope="col">Usuario Modificacion</th>
+                                <th scope="col">Fecha Modificacion</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="especialidad : ${lista}">
+                                <td th:text="${especialidad.nombreEspecialidad}">
+                                <td th:text="${especialidad.estado} ? 'Activa' : 'No Activa'">
+                                <td th:text="${especialidad.usuarioCreacion}">
+                                <td th:text="${#dates.format(especialidad.fecha_registro,'yyyy-MM-dd')}">
+                                <td th:text="${especialidad.usuarioModificacion}">
+                                <td th:text="${#dates.format(especialidad.fecha_modificacion,'yyyy-MM-dd')}">
+
+                                <td><a class="btn btn-info"
+                                       th:href="@{/especialidad/editar/{id}(id=${especialidad.id})}" href="#">Editar</a>
+                                </td>
+                                <td><a class="btn btn-danger"
+                                       th:onclick="eliminarEspecialidad('[[${especialidad.id}]]')">Eliminar</a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+</html>

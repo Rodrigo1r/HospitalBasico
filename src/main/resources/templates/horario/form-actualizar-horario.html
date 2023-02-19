@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+<!-- Contenido Dinamico   -->
+<!-- Inicio del #main -->
+<main id="main" class="main">
+    <!-- Titulo de Pagina -->
+    <div class="pagetitle">
+        <h1>Configuracion de horarios</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html"
+                                               th:href="@{/home}">Inicio</a></li>
+                <li class="breadcrumb-item">Tabla</li>
+                <li class="breadcrumb-item active">Datos</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- End Page Title -->
+
+    <div class="container">
+
+        <section class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="alert alert-danger alert-dismissible fade show"
+                             role="alert" th:if="${pExiste != null}">
+                            <a th:text="${pExiste}"> </a>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="alert alert-danger alert-dismissible fade show"
+                             role="alert" th:if="${pIdentif != null}">
+                            <a th:text="${pIdentif}"> </a>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+
+
+                        <div class="card">
+
+                            <div class="card-body">
+
+                                <form class="row g-3 needs-validation" novalidate method="post"
+                                      action="#" th:action="@{/horario/editar/{id}(id=${id})}"
+                                      th:object="${configuracion}">
+                                    <br>
+
+                                    <div class="card-body">
+                                        <div class="mb-3 row">
+                                            <strong>Dias de Trabajo Semanal </strong>
+                                            <p>
+                                            <div class="col-4">
+                                                <label>Dia inicial</label> <select
+                                                    name="dia_inicio_semana" th:field="*{dia_inicio_semana}"
+                                                    required class="form-control">
+                                                <option disabled selected="true" value="">Seleccione.....</option>
+                                                <option th:each="diaS : ${listaDias}"
+                                                        th:value="${diaS.id}" th:text="${diaS.nombreDia}"></option>
+
+                                            </select>
+                                                <div class="invalid-feedback">Por favor seleccione de
+                                                    Inicial de Semana
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label>Dia Final</label> <select
+                                                    name="dia_fin_semana" th:field="*{dia_fin_semana}"
+                                                    required class="form-control">
+                                                <option disabled selected="true" value="">Seleccione.....</option>
+                                                <option th:each="diaS : ${listaDias}"
+                                                        th:value="${diaS.id}" th:text="${diaS.nombreDia}"></option>
+
+                                            </select>
+                                                <div class="invalid-feedback">Por favor seleccione de
+                                                    Final de Semana
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="container">
+                                        <div class="mb-3 row">
+                                            <strong>Tiempo de Planificacion y duracion de Consultas</strong>
+                                            <p>
+
+                                            <div class="col-3">
+                                                <label for="dias_planificacion" class="form-label">Dias de planificacion
+                                                </label> <input type="number" name="dias_planificacion"
+                                                                class="form-control" id="dias_planificacion" required
+                                                                th:field="*{dias_planificacion}">
+                                                <div class="invalid-feedback">Por favor, ingrese los dias de
+                                                    planificacion
+                                                </div>
+                                            </div>
+
+                                            <div class="col-3">
+                                                <label for="duracion_cita" class="form-label">Tiempo
+                                                    en minutos</label> <input type="time" name="duracion_cita"
+                                                                              class="form-control" id="duracion_cita"
+                                                                              required
+                                                                              th:field="*{duracion_cita}">
+                                                <div class="invalid-feedback">Por favor, el tiempo de
+                                                    duracion de la consulta
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="container">
+                                        <div class="mb-3 row">
+                                            <strong>Horarios de Atencion en la mañana</strong>
+                                            <p></p>
+                                            <div class="col-3">
+                                                <label for="hora_inicio_dia" class="form-label">Desde</label>
+                                                <input type="time" name="hora_inicio_dia"
+                                                       class="form-control" id="hora_inicio_dia" required
+                                                       th:field="*{hora_inicio_dia}">
+                                                <div class="invalid-feedback">Por favor, horario
+                                                    inicial de atencion
+                                                </div>
+                                            </div>
+
+                                            <div class="col-3">
+                                                <label for="hora_fin_dia" class="form-label">Hasta</label>
+                                                <input type="time" name="hora_fin_dia" class="form-control"
+                                                       id="hora_fin_dia" required th:field="*{hora_fin_dia}">
+                                                <div class="invalid-feedback">Por favor, horario
+                                                    final de atencion
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="container">
+                                        <div class="mb-3 row">
+                                            <strong>Horarios de Atencion en la Tarde</strong>
+                                            <p></p>
+                                            <div class="col-3">
+                                                <label for="hora_inicio_tarde" class="form-label">Desde</label>
+                                                <input type="time" name="hora_inicio_tarde"
+                                                       class="form-control" id="hora_inicio_tarde" required
+                                                       th:field="*{hora_inicio_tarde}">
+                                                <div class="invalid-feedback">Por favor, horario
+                                                    inicial de atencion
+                                                </div>
+                                            </div>
+
+                                            <div class="col-3">
+                                                <label for="hora_fin_tarde" class="form-label">Hasta</label>
+                                                <input type="time" name="hora_fin_tarde"
+                                                       class="form-control" id="hora_fin_tarde" required
+                                                       th:field="*{hora_fin_tarde}" autofocus>
+                                                <div class="invalid-feedback">Por favor, horario
+                                                    final de atencion
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="text-center">
+                                        <button class="btn btn-primary" type="submit">Configurar
+                                            Horario
+                                        </button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main>
+<!-- End #main -->
+
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+</html>

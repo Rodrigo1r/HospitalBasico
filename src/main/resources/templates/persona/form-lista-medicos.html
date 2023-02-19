@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+<!-- Contenido Dinamico   -->
+<main id="main" class="main">
+
+    <!-- Titulo de Pagina -->
+    <div class="pagetitle">
+        <h1>Gestion de Medicos</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" th:href="@{/templates/home}">Inicio</a></li>
+                <li class="breadcrumb-item">Tabla</li>
+                <li class="breadcrumb-item active">Datos</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Reporte de Medicos</h3>
+
+                        <h2 th:if="${#lists.isEmpty(listaMed)}">No hay Medicos Registrados</h2>
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+
+                                <th scope="col">Ced.</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Ciudad</th>
+
+                                <th scope="col">Roles</th>
+                                <th scope="col">Especialidades</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="persona : ${listaMed}">
+
+                                <td th:text="${persona.identificacion}">
+                                <td th:text="${persona.nombres}">
+                                <td th:text="${persona.apellidos}">
+                                <td th:text="${persona.telefono}">
+                                <td th:text="${persona.lugar_residencia}">
+
+                                <td th:text="${persona.roles}">
+                                <td th:text="${persona.especialidades}">
+                                <td><a class="btn btn-info"
+                                       th:href="@{/persona/gestionMedico/{id}(id=${persona.id})}">Gestionar</a></td>
+
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+</html>

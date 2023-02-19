@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/form-login}">
+
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>Registro de usuarios</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
+
+<!-- Favicons -->
+<link th:href="@{/assets/img/favicon.png}" rel="icon">
+<link th:href="@{/assets/img/apple-touch-icon.png}"
+	rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link th:href="@{/assets/css/css.css}" rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/vendor/boxicons/css/boxicons.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/vendor/quill/quill.snow.css}" rel="stylesheet">
+<link th:href="@{/assets/vendor/quill/quill.bubble.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/vendor/remixicon/remixicon.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/vendor/simple-datatables/style.css}"
+	rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="@{/assets/css/style.css}" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+	<main>
+		<div class="container" layout:fragment="page-cabecera">
+
+			<section
+				class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div
+							class="col-lg-6 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+							<div class="d-flex justify-content-center py-4">
+								<a href="#"
+									class="logo d-flex align-items-center w-auto"> <img
+									th:src="@{/assets/img/logo.png}" alt=""> <span
+									class="d-none d-lg-block">Hospital Básico el Oro</span>
+								</a>
+							</div>
+							<!-- End Logo -->
+
+							<div class="card mb-3"> 
+
+								<div class="card-body">
+
+									<div class="pt-4 pb-2" layout:fragment="page-contenido">
+										<h5 class="card-title text-center pb-0 fs-4">Crear una
+											cuenta</h5>
+										<p class="text-center medium">Ingrese sus datos personales</p>
+									</div>
+
+									<form class="row g-3 needs-validation" novalidate method="post"
+										action="#" th:action="@{/persona/registro}"
+										th:object="${persona}">
+
+										<div class="col-6">
+											<label for="identificacion" class="form-label">Identificación</label>
+											<input type="text" name="identificacion" class="form-control"
+												id="identificacion" required th:field="*{identificacion}">
+											<div class="invalid-feedback">Por favor, ingrese su
+												identificación!</div>
+										</div>
+										<div class="col-6">
+											<label for="fecha_nacimiento">Fecha de Nacimiento</label> <input
+												type="date" class="form-control" id="fecha_nacimiento"
+												placeholder="Fecha de  Nacimiento"
+												th:field="*{fecha_nacimiento}" required />
+											<div class="invalid-feedback">Por favor Seleccione su
+												fecha de nacimieno</div>
+										</div>
+
+
+										<div class="col-6">
+											<label for="nombres" class="form-label">Nombres</label> <input
+												type="text" name="nombres" class="form-control" id="nombres"
+												required th:field="*{nombres}">
+											<div class="invalid-feedback">Por favor, ingrese su
+												nombre!</div>
+										</div>
+
+										<div class="col-6">
+											<label for="apellidos" class="form-label">Apellidos</label> <input
+												type="text" name="apellidos" class="form-control"
+												id="apellidos" required th:field="*{apellidos}">
+											<div class="invalid-feedback">Por favor, ingrese su
+												apellido!</div>
+										</div>
+
+
+
+										<div class="col-md-6">
+											<label for="correo" class="form-label">Email</label> <input
+												type="email" name="correo" class="form-control" id="correo"
+												required th:field="*{correo}">
+											<div class="invalid-feedback">Por favor ingrese una
+												dirección de correo valida!</div>
+										</div>
+
+
+										<div class="col-md-6">
+											<label for="categoria">Género</label> <select
+												th:field="*{genero}" th:required class="form-select">
+												<option selected value="-1">Seleccione una opcion</option>
+												<option value="Masculino">Masculino</option>
+												<option value="Femenino">Femenino</option>
+												<option th:each="categoria : ${categorias}"
+													th:value="${genero.id}" th:text="${genero.nombre}">Genero</option>
+											</select>
+											<div class="invalid-feedback">Por favor seleccione
+												género!</div>
+										</div>
+										<div class="col-6">
+											<label for="lugar_residencia">Lugar de Residencia</label> <input
+												type="text" class="form-control" id="lugar_residencia"
+												placeholder="Lugar de Residencia"
+												th:field="*{lugar_residencia}" required />
+											<div class="invalid-feedback">Por favor ingrese lugar
+												de residencia</div>
+										</div>
+
+										<div class="col-6">
+											<label for="telefono">Teléfono</label> <input
+												type="text" class="form-control" id="telefono"
+												placeholder="telefono"
+												th:field="*{telefono}" required />
+											<div class="invalid-feedback">Por favor ingrese numero de teléfono</div>
+										</div>
+
+
+
+										<div class="col-6">
+											<label for="usuario" class="form-label">Username</label>
+											<div class="input-group has-validation">
+												<span class="input-group-text" id="inputGroupPrepend">@</span>
+												<input type="text" name="usuario" class="form-control"
+													id="usuario" required th:field="*{usuario}">
+												<div class="invalid-feedback">Por favor ingrese un
+													nombre de usuario.</div>
+											</div>
+										</div>
+
+										<div class="col-6">
+											<label for="yourPassword" class="form-label">Password</label>
+											<input type="password" name="password" class="form-control"
+												id="yourPassword" required>
+											<div class="invalid-feedback">Por favor ingrese su
+												password!</div>
+										</div>
+
+										<div class="col-12">
+											<div class="form-check">
+												<input class="form-check-input" name="terms" type="checkbox"
+													value="" id="acceptTerms" required> <label
+													class="form-check-label" for="acceptTerms">Acepto
+													los <a href="#">terminos y condiciones</a>
+												</label>
+												<div class="invalid-feedback">Debe estar de acuerdo
+													antes de enviar.</div>
+											</div>
+										</div>
+										<div class="text-center">
+											<button class="btn btn-primary" type="submit">Crear Cuenta</button>
+										</div>
+										<div class="text-center">
+											<p class="text-center medium mb-0 " >
+												Ya tiene una cuenta? <a href="form-login.html"
+													th:href="@{/}">Inicie sesion</a>
+											</p>
+										</div>
+									</form>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+
+			</section>
+
+		</div>
+	</main>
+	<!-- End #main -->
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+</html>

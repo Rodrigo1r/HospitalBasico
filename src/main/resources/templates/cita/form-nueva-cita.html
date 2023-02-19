@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+	<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+	<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+	<!-- Contenido Dinamico   -->
+	<!-- Inicio del #main -->
+	<main id="main" class="main">
+		<!-- Titulo de Pagina -->
+		<div class="pagetitle">
+			<h1 > <a >Registro de Atenciones Médicas</a></h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html"
+						th:href="@{/home}">Inicio</a></li>
+					<li class="breadcrumb-item">Tabla</li>
+					<li class="breadcrumb-item active">Datos</li>
+				</ol>
+			</nav>
+		</div>
+
+		<!-- End Page Title -->
+		<div class="container">
+
+			<section class="section">
+				<div class="container">
+
+
+					<div class="alert alert-danger alert-dismissible fade show" role="alert"
+						 th:if="${pExiste != null}"><a th:text="${pExiste}"> </a>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+					<div class="alert alert-danger alert-dismissible fade show" role="alert"
+						 th:if="${pIdentif != null}"><a th:text="${pIdentif}"> </a>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+
+
+					<div class="card" th:if="${paciente == null}">
+						<div class="card-body">
+
+							<form class="form-inline needs-validation" novalidate method="post"
+								  action="#" th:action="@{/cita/buscarPaciente}">
+
+
+								<div class="row">
+									<div class="col-xs-12 col-md-3">
+										<div class="form-group">
+											<br>
+											<label for="identificacion"> <strong>Buscar paciente </strong></label>
+											<div class="input-group">
+												<input id="identif" th:name="identificacion" type="text" required
+													   class="form-control"
+													   placeholder="identificacion">
+												<div class="invalid-feedback">Por favor ingrese número de identificación
+												</div>
+												<span class="input-group-addon"></span>
+												<button class="btn btn-info" type="submit"
+												>Buscar
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</section>
+		</div>
+
+
+
+
+		<div class="container">
+			<section>
+				<div class="container">
+					<div class="card" th:if="${paciente != null}">
+						<div class="card-body">
+
+							<h5><strong>Datos del paciente</strong></h5>
+
+							<form class="form-inline needs-validation" novalidate
+								  action="#" th:object="${paciente}">
+
+								<div class="row">
+
+									<div class="col-1" hidden>
+										<label for="id_paciente" class="form-label">Cod.</label>
+										<input style="background:#e6e6e6" type="text" name="id_paciente"
+											   class="form-control"
+											   id="id_paciente" readonly th:field="*{id}">
+									</div>
+
+									<div class="col-3">
+										<label for="identificacion" class="form-label">Identificacion</label>
+										<input style="background:#e6e6e6" type="text" name="identificacion"
+											   class="form-control"
+											   id="identificacion" readonly th:field="*{identificacion}">
+									</div>
+
+
+									<div class="col-3">
+										<label for="nombres" class="form-label">Nombres</label>
+										<input style="background:#e6e6e6" type="text" name="nombres" class="form-control"
+											   id="nombres" readonly th:field="*{nombres}">
+									</div>
+
+									<div class="col-3">
+										<label for="apellidos" class="form-label">Apellidos</label>
+										<input style="background:#e6e6e6" type="text" name="apellidos" class="form-control"
+											   id="apellidos" readonly th:field="*{apellidos}">
+									</div>
+
+									<div class="col-3">
+										<label for="telefono" class="form-label">Telefono</label>
+										<input style="background:#e6e6e6" type="text" name="telefono" class="form-control"
+											   id="telefono" readonly th:field="*{telefono}">
+									</div>
+									<p>
+									<div class="col-4">
+										<label for="correo" class="form-label">Correo</label>
+										<input style="background:#e6e6e6" type="text" name="correo" class="form-control"
+											   id="correo" readonly th:field="*{correo}">
+									</div>
+
+									<div class="col-2">
+										<label for="genero" class="form-label">Genero</label>
+										<input style="background:#e6e6e6" type="text" name="genero" class="form-control"
+											   id="genero" readonly th:field="*{genero}">
+									</div>
+
+									<div class="col-2">
+										<label for="lugar_residencia" class="form-label">Lugar residencia</label>
+										<input style="background:#e6e6e6" type="text" name="lugar_residencia"
+											   class="form-control"
+											   id="lugar_residencia" readonly th:field="*{lugar_residencia}">
+									</div>
+
+									<div class="col-2">
+										<label for="fecha_nacimiento" class="form-label">Fecha Nacimiento</label>
+										<input style="background:#e6e6e6" type="text" name="fecha_nacimiento"
+											   class="form-control"
+											   id="fecha_nacimiento" readonly th:field="*{fecha_nacimiento}">
+									</div>
+									<div class="col-2">
+										<label for="edad_paciente" class="form-label">Edad</label>
+										<input style="background:#e6e6e6" type="text" name="edad_paciente"
+											   class="form-control"
+											   id="edad_paciente" readonly>
+									</div>
+
+
+								</div>
+
+							</form>
+
+
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+
+
+		<section class="section">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+
+							<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${citaExiste != null}"><a th:text="${citaExiste}"> </a>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+							<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${pIdentif != null}"><a th:text="${pIdentif}"> </a>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+
+
+							<div class="card" th:if="${paciente != null}" >
+
+								<div class="card-body">
+									<h3 class="card-title text-center" ><a >Datos de la cita </a></h3>
+
+									<form class="row g-3 needs-validation" novalidate method="post"
+										action="#" th:action="@{/cita/crear}"
+										  th:object="${cita}">
+
+
+
+										<div class="col-4 form-group">
+											<label>Especialidad</label>
+											<select id="id_especialidad" name="id_especialidad"
+													th:field="*{id_especialidad}" required
+													class="form-control">
+												<option selected value="-1">Seleccione.....</option>
+												<option
+														th:each="especialidad : ${especialidades}" th:value="${especialidad.id}"
+														th:text="${especialidad.nombreEspecialidad}"></option>
+
+											</select>
+											<div class="invalid-feedback">Por favor seleccione
+												una especialidad!
+											</div>
+										</div>
+
+
+										<div class="col-4">
+											<label>Fecha de la cita</label>
+											<select name="id_diasEspe" id="id_diasEspe"
+													required
+													class="form-control">
+												<option disabled selected value="">Seleccione.....</option>
+
+											</select>
+											<div class="invalid-feedback">Por favor seleccione
+												dia de la cita!
+											</div>
+
+										</div>
+
+										<div class="col-4">
+											<label>Medico</label>
+											<select name="id_medico" id="id_medico"
+													th:field="*{id_medico}" required
+													class="form-control">
+												<option disabled selected value="">Seleccione.....</option>
+
+											</select>
+											<div class="invalid-feedback">Por favor seleccione
+												un medico!
+											</div>
+										</div>
+
+											<div class="col-4">
+												<label>Horario</label>
+												<select name="id_horario_cita" id="id_horario_cita"
+														th:field="*{id_horario}" required
+														class="form-control">
+													<option disabled selected value="">Seleccione.....</option>
+
+												</select>
+												<div class="invalid-feedback">Por favor seleccione
+													un horario!
+												</div>
+											</div>
+
+
+										<input  type="hidden" for="id_persona" th:field="*{id_persona}"></input>
+
+										<input type="hidden" for="nombre_medico" th:field="*{nombreMedico}"></input>
+
+
+										<br>
+
+
+											<div class="text-center">
+											<!--	<button class="btn btn-primary" th:onclick="guardarCitaPaciente()">Guardar -->
+												<button class="btn btn-primary" type="submit">Guardar
+												</button>
+											</div>
+
+									</form>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+
+			</section>
+
+		</div>
+	</main>
+	<!-- End #main -->
+
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+<script>
+	calcularEdad();
+	buscaDiasEspecialidad();
+	buscaMedicosDiasEspecialidad();
+	buscaHorariosEspecialidadDiaMedico();
+	obtenerIdPaciente();
+</script>
+</html>

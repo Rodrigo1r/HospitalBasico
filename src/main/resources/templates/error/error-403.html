@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/plantilla :: head"> </head>
+<body>
+
+  <main>
+    <div class="container">
+
+      <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+        <h1>403</h1>
+        <h2>Acceso Denegado</h2>
+        <img th:src="@{/assets/img/not-found.svg}" class="img-fluid py-5" alt="Usted no tiene autorizacion para acceder a esta pagina">
+         <h5>Lo sentimos <span th:text="${#authentication.name}"></span> , Usted no tiene autorizacion para acceder a esta pagina</h5>
+          <h5>Usted tiene un rol de: <span th:text="${#authentication.authorities}"></span></h5>
+			<a class="btn" href="index.html" th:href="@{/home}">Regresar al menu principal</a>
+      </section>
+
+    </div>
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<footer th:replace="plantilla/plantilla ::footer"></footer>
+
+</body>
+
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+	<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+	<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+	<!-- Contenido Dinamico   -->
+	<!-- Inicio del #main -->
+	<main id="main" class="main">
+		<!-- Titulo de Pagina -->
+		<div class="pagetitle">
+			<h1>Registro de Usuarios</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html"
+						th:href="@{/home}">Inicio</a></li>
+					<li class="breadcrumb-item">Tabla</li>
+					<li class="breadcrumb-item active">Datos</li>
+				</ol>
+			</nav>
+		</div>
+
+		<!-- End Page Title -->
+
+		<div class="container">
+
+			<section class="section">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+
+							<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${pExiste != null}"><a th:text="${pExiste}"> </a>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+							<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${pIdentif != null}"><a th:text="${pIdentif}"> </a>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+
+
+							<div class="card">
+
+								<div class="card-body">
+									<h3 class="card-title">Registro de usuarios</h3>
+
+									<form class="row g-3 needs-validation" novalidate method="post"
+										action="#" th:action="@{/persona/agregar}"
+										th:object="${persona}">
+
+										<div class="col-3">
+											<label for="identificacion" class="form-label">Identificacion</label>
+											<input type="text" name="identificacion" class="form-control"
+												id="identificacion" required th:field="*{identificacion}"
+												autofocus>
+											<div class="invalid-feedback">Por favor, ingrese su
+												identificacion!</div>
+										</div>
+
+										<div class="col-4">
+											<label for="nombres" class="form-label">Nombres</label> <input
+												type="text" name="nombres" class="form-control" id="nombres"
+												required th:field="*{nombres}">
+											<div class="invalid-feedback">Por favor, ingrese su
+												nombre!</div>
+										</div>
+
+										<div class="col-4">
+											<label for="apellidos" class="form-label">Apellidos</label> <input
+												type="text" name="apellidos" class="form-control"
+												id="apellidos" required th:field="*{apellidos}">
+											<div class="invalid-feedback">Por favor, ingrese su
+												apellido!</div>
+										</div>
+										<div class="col-3">
+											<label for="fecha_nacimiento">Fecha de Nacimiento</label> <input
+												type="date" class="form-control" id="fecha_nacimiento"
+												placeholder="Fecha de  Nacimiento"
+												th:field="*{fecha_nacimiento}" required />
+											<div class="invalid-feedback">Por favor Seleccione su
+												fecha de nacimieno</div>
+										</div>
+
+
+
+
+										<div class="col-md-4">
+											<label for="correo" class="form-label">Email</label> <input
+												type="email" name="correo" class="form-control" id="correo"
+												required th:field="*{correo}">
+											<div class="invalid-feedback">Por favor ingrese una
+												direccion de correo valida!</div>
+										</div>
+
+
+										<div class="col-md-4">
+											<label >Genero</label> <select
+												th:field="*{genero}" required class="form-select">
+											<option selected value="">Seleccione.....</option>
+											<option value="Masculino">Masculino</option>
+												<option value="Femenino">Femenino</option>
+												<option th:each="genero : ${genero}"
+													th:value="${genero.id}" th:text="${genero.nombre}">Genero</option>
+											</select>
+											<div class="invalid-feedback">Por favor seleccione
+												genero!</div>
+										</div>
+										<div class="col-4">
+											<label for="lugar_residencia">Lugar de Residencia</label> <input
+												type="text" class="form-control" id="lugar_residencia"
+												placeholder="Lugar de Residencia"
+												th:field="*{lugar_residencia}" required />
+											<div class="invalid-feedback">Por favor ingrese lugar
+												de residencia</div>
+										</div>
+										<br>
+
+
+										<div class="col-4">
+											<label for="telefono">Telefono</label>
+											<input type="text" class="form-control" id="telefono" placeholder="telefono"
+												th:field="*{telefono}" required />
+											<div class="invalid-feedback">Por favor ingrese numero
+												de telefono</div>
+										</div>
+
+										<div class="col-4">
+											<label >Rol</label>
+											<select  name="roles" th:field="*{roles}" required class="form-control selectpicker" multiple>
+												
+												<option
+														th:each="rol : ${roles}" th:value="${rol.id}"
+														th:text="${rol.nombre}" ></option>
+
+											</select>
+											<div class="invalid-feedback">Por favor seleccione
+												roles!</div>
+										</div>
+
+										<div class="col-3">
+											<label for="usuario" class="form-label">Username</label>
+											<div class="input-group has-validation">
+												<span class="input-group-text" id="inputGroupPrepend">@</span>
+												<input type="text" name="usuario" class="form-control"
+													id="usuario" required th:field="*{usuario}">
+												<div class="invalid-feedback">Por favor ingrese un
+													nombre de usuario.</div>
+											</div>
+										</div>
+
+										<div class="col-3">
+											<label for="password" class="form-label">Password</label>
+											<input type="password" name="password" class="form-control"
+												id="password" required>
+											<div class="invalid-feedback">Por favor ingrese su
+												password!</div>
+										</div>
+
+
+
+										<div class="text-center">
+											<button class="btn btn-primary" type="submit">Crear
+												Usuario</button>
+										</div>
+									</form>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+
+			</section>
+
+		</div>
+	</main>
+	<!-- End #main -->
+
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+</html>
