@@ -1276,3 +1276,27 @@ h6 {
     width: 100%;
     height: 100%;
 }
+
+/*--------------------------------------------------------------
+# Coloca botones en la misma linea pero en los extremos
+adicional configura un especio entre la pantalla y los controles
+--------------------------------------------------------------*/
+.magen-top-mas-extremo{
+    text-decoration: none;
+    color: #374457;
+    font-size: 18px;
+    font-weight: bold;
+    display:flex;
+    align-items:center;
+    margin: 10px;
+    justify-content: space-between;
+}
+.magen-top-misma-linea{
+    text-decoration: none;
+    color: #374457;
+    font-size: 18px;
+    font-weight: bold;
+    display:flex;
+    align-items:center;
+    margin: 10px;
+}
