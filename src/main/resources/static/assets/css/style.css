@@ -1300,3 +1300,9 @@ adicional configura un especio entre la pantalla y los controles
     align-items:center;
     margin: 10px;
 }
+
+.controles-misma-linea{
+
+    display: inline-block;
+
+}

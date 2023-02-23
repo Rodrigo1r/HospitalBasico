@@ -39,9 +39,46 @@
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
 
+					<style>
+						.espacio-superior{
+							margin: 10px;
+						}
+					</style>
+
+					<script>
+						function enableSearchField(searchType) {
+							if (searchType === 'buscarCedulaRadio') {
+								document.getElementById('buscarPorCedula').removeAttribute('disabled');
+								document.getElementById('buscarPorCedula').setAttribute('required', 'true');
+								document.getElementById('buscarPorNombre').setAttribute('disabled', 'true');
+								document.getElementById('buscarPorNombre').removeAttribute('required');
+							} else {
+								document.getElementById('buscarPorNombre').removeAttribute('disabled');
+								document.getElementById('buscarPorNombre').setAttribute('required', 'true');
+								document.getElementById('buscarPorCedula').setAttribute('disabled', 'true');
+								document.getElementById('buscarPorCedula').removeAttribute('required');
+							}
+						}
+					</script>
+
 
 					<div class="card" th:if="${paciente == null}">
 						<div class="card-body">
+
+							<div class="form-check form-check-inline espacio-superior">
+								<input class="form-check-input" type="radio" name="tipoBusqueda" value="buscarCedulaRadio" id="radioCedula" onclick="enableSearchField('buscarCedulaRadio')" >
+								<label class="form-check-label" for="radioCedula">
+									Buscar por Cédula
+								</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="tipoBusqueda" value="buscarNombreRadio" id="radioNombre" onclick="enableSearchField('buscarNombreRadio')">
+								<label class="form-check-label" for="radioNombre">
+									Buscar por nombres
+								</label>
+
+							</div>
+
 
 							<form class="form-inline needs-validation" novalidate method="post"
 								  action="#" th:action="@{/cita/buscarPaciente}">
@@ -49,19 +86,19 @@
 
 								<div class="row">
 									<div class="col-xs-12 col-md-3">
-										<div class="form-group">
-											<br>
-											<label for="identificacion"> <strong>Buscar paciente </strong></label>
-											<div class="input-group">
-												<input id="identif" th:name="identificacion" type="text" required
-													   class="form-control"
-													   placeholder="identificacion">
-												<div class="invalid-feedback">Por favor ingrese número de identificación
-												</div>
-												<span class="input-group-addon"></span>
-												<button class="btn btn-info" type="submit"
-												>Buscar
-												</button>
+										<div class="controles-misma-linea">
+											<div class="controles-misma-linea">
+											<label for="buscarPorCedula"> <strong>Cédula</strong></label>
+											<input id="buscarPorCedula" th:name="identificacion" type="text"
+												   class="form-control" placeholder="digite cédula" disabled required>
+												<div class="invalid-feedback">Por favor ingrese cédula a buscar	</div>
+											</div>
+											<div class="controles-misma-linea">
+												<label for="buscarPorNombre"> <strong>Nombres</strong></label>
+												<input id="buscarPorNombre" th:name="nombre" type="text"
+													   class="form-control" placeholder="digite nombres" disabled required>
+												<div class="invalid-feedback">Por favor ingrese nombres a buscar</div>
+												<button class="btn btn-info" type="submit">Buscar</button>
 											</div>
 										</div>
 									</div>
