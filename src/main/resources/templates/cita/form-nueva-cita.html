@@ -39,24 +39,24 @@
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
 
-					<style>
-						.espacio-superior{
-							margin: 10px;
-						}
-					</style>
-
 					<script>
 						function enableSearchField(searchType) {
 							if (searchType === 'buscarCedulaRadio') {
-								document.getElementById('buscarPorCedula').removeAttribute('disabled');
+								document.getElementById('buscarPorCedula').removeAttribute('hidden');
 								document.getElementById('buscarPorCedula').setAttribute('required', 'true');
-								document.getElementById('buscarPorNombre').setAttribute('disabled', 'true');
+								document.getElementById('buscarPorNombre').setAttribute('hidden', 'true');
 								document.getElementById('buscarPorNombre').removeAttribute('required');
+								document.querySelector('#labelBusqueda').innerText = 'Cédula';
+								document.querySelector('#invalidBuscar').innerText = 'Por favor ingrese cédula a buscar';
+
+
 							} else {
-								document.getElementById('buscarPorNombre').removeAttribute('disabled');
+								document.getElementById('buscarPorNombre').removeAttribute('hidden');
 								document.getElementById('buscarPorNombre').setAttribute('required', 'true');
-								document.getElementById('buscarPorCedula').setAttribute('disabled', 'true');
+								document.getElementById('buscarPorCedula').setAttribute('hidden', 'true');
 								document.getElementById('buscarPorCedula').removeAttribute('required');
+								document.querySelector('#labelBusqueda').innerText = 'Nombres';
+								document.querySelector('#invalidBuscar').innerText = 'Por favor ingrese nombres a buscar';
 							}
 						}
 					</script>
@@ -86,21 +86,22 @@
 
 								<div class="row">
 									<div class="col-xs-12 col-md-3">
-										<div class="controles-misma-linea">
-											<div class="controles-misma-linea">
-											<label for="buscarPorCedula"> <strong>Cédula</strong></label>
+
+											<div class="contenedor">
+											<strong><label id="labelBusqueda" for="buscarPorCedula" ></label></strong>
 											<input id="buscarPorCedula" th:name="identificacion" type="text"
-												   class="form-control" placeholder="digite cédula" disabled required>
-												<div class="invalid-feedback">Por favor ingrese cédula a buscar	</div>
-											</div>
-											<div class="controles-misma-linea">
-												<label for="buscarPorNombre"> <strong>Nombres</strong></label>
+												   class="form-control" placeholder="digite cédula" hidden required>
+
+
 												<input id="buscarPorNombre" th:name="nombre" type="text"
-													   class="form-control" placeholder="digite nombres" disabled required>
-												<div class="invalid-feedback">Por favor ingrese nombres a buscar</div>
+													   class="form-control" placeholder="digite nombres" hidden required>
+												<div id="invalidBuscar" class="invalid-feedback"></div>
+
+
 												<button class="btn btn-info" type="submit">Buscar</button>
+
 											</div>
-										</div>
+
 									</div>
 								</div>
 

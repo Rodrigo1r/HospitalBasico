@@ -1306,3 +1306,18 @@ adicional configura un especio entre la pantalla y los controles
     display: inline-block;
 
 }
+
+.contenedor{
+    display: inline-block;
+    background-color: white;
+    justify-content: left;
+}
+.contenedor .btn{
+    color: white;
+    font-weight: bold;
+}
+.contenedor .b{
+    display: inline;
+    width: 100px;
+    height: 50px;
+}
