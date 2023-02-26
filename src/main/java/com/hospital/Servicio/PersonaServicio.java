@@ -208,4 +208,13 @@ public class PersonaServicio {
         return personaRepo.totalPacientesMesActual();
     }
 
+    public List<Persona> buscaPersonaPorApellidos(String term){
+    	return personaRepo.buscaPersonaPorApellidos(term);
+    }
+    
+    public List<Persona> findByApellidosLikeIgnoreCase(String term){
+    	return personaRepo.findByApellidosLikeIgnoreCase("%" + term + "%");
+    }
+
+    
 }

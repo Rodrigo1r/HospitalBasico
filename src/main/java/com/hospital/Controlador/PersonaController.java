@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hospital.Modelo.Persona;
 import com.hospital.Servicio.PersonaServicio;
@@ -157,6 +158,14 @@ public class PersonaController {
         personaServicio.actualizarMedico(medico);
         return "redirect:/persona/listaMedicos";
 
-
     }
+    
+    @GetMapping(value = "/cargarPersonas/{term}" , produces ={"application/json"})
+    public @ResponseBody List<Persona> cargarPersonas(@PathVariable String term) {
+        
+        var listaPersona = personaServicio.findByApellidosLikeIgnoreCase(term);
+        return listaPersona;
+    }
+    
+    
 }

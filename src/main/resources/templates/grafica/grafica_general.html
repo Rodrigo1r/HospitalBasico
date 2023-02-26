@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
->
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="plantilla/plantilla-menu :: head"></head>
 
@@ -12,7 +11,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	<!-- End Header -->
 
 	<!-- ======= Sidebar ======= -->
-<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+	<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
 	<!-- End Sidebar-->
 
 	<!-- Contenido Dinamico-->
@@ -35,9 +34,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 				<div class="col-lg-8">
 					<div class="row">
 
-						<div class="alert alert-info alert-dismissible fade show" role="alert" th:if="${sucess != null}"><a th:sucess="${info}"> </a>>
-							A simple info alert—check it out!
-							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						<div class="alert alert-info alert-dismissible fade show"
+							role="alert" th:if="${sucess != null}">
+							<a th:sucess="${info}"> </a>> A simple info alert—check it out!
+							<button type="button" class="btn-close" data-bs-dismiss="alert"
+								aria-label="Close"></button>
 						</div>
 
 						<!-- Inicio Citas -->
@@ -69,9 +70,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 											<i class="bi bi-journal-medical"></i>
 										</div>
 										<div class="ps-3">
-											<h6 th:text="${citasHoy}" ></h6>
-											<span th:text="${porcentaje} + '%'" th:class="'small pt-1 fw-bold ' + ${porcentaje > 0 ? 'text-success'  : 'text-danger'}"></span> <span
-												class="text-muted small pt-2 ps-1" th:text="${porcentaje >0 ? 'aumento' : 'disminución'}"></span>
+											<h6 th:text="${citasHoy}"></h6>
+											<span th:text="${porcentaje} + '%'"
+												th:class="'small pt-1 fw-bold ' + ${porcentaje > 0 ? 'text-success'  : 'text-danger'}"></span>
+											<span class="text-muted small pt-2 ps-1"
+												th:text="${porcentaje >0 ? 'aumento' : 'disminución'}"></span>
 
 										</div>
 									</div>
@@ -113,8 +116,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 										</div>
 										<div class="ps-3">
 											<h6 th:text="${citasMesActual}"></h6>
-											<span th:text="${porcentajeMes} + '%'" th:class="'small pt-1 fw-bold ' + ${porcentajeMes > 0 ? 'text-success'  : 'text-danger'}"></span> <span
-												class="text-muted small pt-2 ps-1" th:text="${porcentajeMes >0 ? 'aumento' : 'disminución'}"></span>
+											<span th:text="${porcentajeMes} + '%'"
+												th:class="'small pt-1 fw-bold ' + ${porcentajeMes > 0 ? 'text-success'  : 'text-danger'}"></span>
+											<span class="text-muted small pt-2 ps-1"
+												th:text="${porcentajeMes >0 ? 'aumento' : 'disminución'}"></span>
 
 										</div>
 									</div>
@@ -155,8 +160,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 										</div>
 										<div class="ps-3">
 											<h6 th:text="${citasAnioActual}"></h6>
-											<span  th:text="${porcentajeAnio} + '%'" th:class="'small pt-1 fw-bold ' + ${porcentajeAnio > 0 ? 'text-success'  : 'text-danger'}" ></span>
-											<span class="text-muted small pt-2 ps-1" th:text="${porcentajeAnio >0 ? 'aumento' : 'disminución'}"></span>
+											<span th:text="${porcentajeAnio} + '%'"
+												th:class="'small pt-1 fw-bold ' + ${porcentajeAnio > 0 ? 'text-success'  : 'text-danger'}"></span>
+											<span class="text-muted small pt-2 ps-1"
+												th:text="${porcentajeAnio >0 ? 'aumento' : 'disminución'}"></span>
 
 										</div>
 									</div>
@@ -173,7 +180,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 
 								<div class="filter">
 									<a class="icon" href="#" data-bs-toggle="dropdown"><i
-											class="bi bi-three-dots"></i></a>
+										class="bi bi-three-dots"></i></a>
 									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 										<li class="dropdown-header text-start">
 											<h6>Filter</h6>
@@ -192,13 +199,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 
 									<div class="d-flex align-items-center">
 										<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+											class="card-icon rounded-circle d-flex align-items-center justify-content-center">
 											<i class="bi bi-people"></i>
 										</div>
 										<div class="ps-3">
 											<h6 th:text="${atencionHoy}"></h6>
-											<span th:text="${porcAtencion} + '%'" th:class="'small pt-1 fw-bold ' + ${porcAtencion > 0 ? 'text-success'  : 'text-danger'}" ></span> <span
-												class="text-muted small pt-2 ps-1" th:text="${porcAtencion >0 ? 'aumento' : 'disminución'}"></span>
+											<span th:text="${porcAtencion} + '%'"
+												th:class="'small pt-1 fw-bold ' + ${porcAtencion > 0 ? 'text-success'  : 'text-danger'}"></span>
+											<span class="text-muted small pt-2 ps-1"
+												th:text="${porcAtencion >0 ? 'aumento' : 'disminución'}"></span>
 
 										</div>
 									</div>
@@ -215,7 +224,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 
 								<div class="filter">
 									<a class="icon" href="#" data-bs-toggle="dropdown"><i
-											class="bi bi-people"></i></a>
+										class="bi bi-people"></i></a>
 									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 										<li class="dropdown-header text-start">
 											<h6>Filter</h6>
@@ -234,13 +243,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 
 									<div class="d-flex align-items-center">
 										<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+											class="card-icon rounded-circle d-flex align-items-center justify-content-center">
 											<i class="bi bi-people"></i>
 										</div>
 										<div class="ps-3">
 											<h6 th:text="${atencionMesActual}"></h6>
-											<span th:text="${porcAtencionMes} + '%'" th:class="'small pt-1 fw-bold ' + ${porcAtencionMes > 0 ? 'text-success'  : 'text-danger'}" ></span> <span
-												class="text-muted small pt-2 ps-1" th:text="${porcAtencionMes >0 ? 'aumento' : 'disminución'}"></span>
+											<span th:text="${porcAtencionMes} + '%'"
+												th:class="'small pt-1 fw-bold ' + ${porcAtencionMes > 0 ? 'text-success'  : 'text-danger'}"></span>
+											<span class="text-muted small pt-2 ps-1"
+												th:text="${porcAtencionMes >0 ? 'aumento' : 'disminución'}"></span>
 
 										</div>
 									</div>
@@ -257,7 +268,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 
 								<div class="filter">
 									<a class="icon" href="#" data-bs-toggle="dropdown"><i
-											class="bi bi-three-dots"></i></a>
+										class="bi bi-three-dots"></i></a>
 									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 										<li class="dropdown-header text-start">
 											<h6>Filter</h6>
@@ -276,13 +287,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 
 									<div class="d-flex align-items-center">
 										<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+											class="card-icon rounded-circle d-flex align-items-center justify-content-center">
 											<i class="bi bi-people"></i>
 										</div>
 										<div class="ps-3">
 											<h6 th:text="${atencionAnioActual}"></h6>
-											<span th:text="${porcAtencionAnio} + '%'" th:class="'small pt-1 fw-bold ' + ${porcAtencionAnio > 0 ? 'text-success'  : 'text-danger'}"></span> <span
-												class="text-muted small pt-2 ps-1" th:text="${porcAtencionAnio >0 ? 'aumento' : 'disminución'}"></span>
+											<span th:text="${porcAtencionAnio} + '%'"
+												th:class="'small pt-1 fw-bold ' + ${porcAtencionAnio > 0 ? 'text-success'  : 'text-danger'}"></span>
+											<span class="text-muted small pt-2 ps-1"
+												th:text="${porcAtencionAnio >0 ? 'aumento' : 'disminución'}"></span>
 
 										</div>
 									</div>
@@ -414,14 +427,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 						<div class="card-body">
 
 
-						<div class="card-body pb-0">
-							<h5 class="card-title">
-								Citas por especialidad <span>| Este año</span>
-							</h5>
+							<div class="card-body pb-0">
+								<h5 class="card-title">
+									Citas por especialidad <span>| Este año</span>
+								</h5>
 
-							<!-- Pie Chart -->
-							<canvas id="pieChart" style="max-height: 400px;"></canvas>
-							<script>
+								<!-- Pie Chart -->
+								<canvas id="pieChart" style="max-height: 400px;"></canvas>
+								<script>
 								document.addEventListener("DOMContentLoaded", () => {
 									new Chart(document.querySelector('#pieChart'), {
 										type: 'pie',
@@ -441,10 +454,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 									});
 								});
 							</script>
-							<!-- End Pie CHart -->
+								<!-- End Pie CHart -->
 
 
-						</div>
+							</div>
 						</div>
 					</div>
 

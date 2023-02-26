@@ -575,3 +575,36 @@ function desactivarHorario(id){
     })
 
 }
+
+function enableSearchField(searchType) {
+									document.getElementById('btnBuscar')
+										.removeAttribute('disabled');
+	
+							if (searchType === 'buscarCedulaRadio') {
+								document.getElementById('buscarPorCedula')
+										.removeAttribute('hidden');
+								document.getElementById('buscarPorCedula')
+										.setAttribute('required', 'true');
+								document.getElementById('buscarPorNombre')
+										.setAttribute('hidden', 'true');
+								document.getElementById('buscarPorNombre')
+										.removeAttribute('required');
+										
+										
+								document.querySelector('#labelBusqueda').innerText = 'Cédula';
+								document.querySelector('#invalidBuscar').innerText = 'Por favor ingrese cédula a buscar';
+
+							} else {
+								document.getElementById('buscarPorNombre')
+										.removeAttribute('hidden');
+								document.getElementById('buscarPorNombre')
+										.setAttribute('required', 'true');
+								document.getElementById('buscarPorCedula')
+										.setAttribute('hidden', 'true');
+								document.getElementById('buscarPorCedula')
+										.removeAttribute('required');
+								document.querySelector('#labelBusqueda').innerText = 'Nombres';
+								document.querySelector('#invalidBuscar').innerText = 'Por favor ingrese nombres a buscar';
+
+							}
+}
