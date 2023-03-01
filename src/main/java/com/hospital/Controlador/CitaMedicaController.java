@@ -177,7 +177,7 @@ public class CitaMedicaController {
     }
 
 
-    @RequestMapping(value = "/cargaEspecialidadesDias", method = RequestMethod.GET)
+    @GetMapping(value = "/cargaEspecialidadesDias")
     public @ResponseBody List<HorarioAtencion> cargaEspecialidadesDias(@RequestParam(value = "espeId", required = true) Long espeId) {
 
         var listaDias = horarioAtencionSvc.buscaHorariosEspecialidad(espeId);
@@ -186,7 +186,7 @@ public class CitaMedicaController {
 
     }
 
-    @RequestMapping(value = "/cargaDiasLibresPorEspecialidad", method = RequestMethod.GET)
+    @GetMapping(value = "/cargaDiasLibresPorEspecialidad")
     public @ResponseBody List<IMedicosHorarios> cargaDiasLibresPorEspecialidad(@RequestParam(value = "espeId", required = true) Long espeId) {
 
         var listaDias = horarioAtencionSvc.buscaDiasLibresPorEspecialidad(espeId);
@@ -195,7 +195,7 @@ public class CitaMedicaController {
 
     }
 
-    @RequestMapping(value = "/cargaMedicosPorEspecialidad", method = RequestMethod.GET)
+    @GetMapping(value = "/cargaMedicosPorEspecialidad")
     public @ResponseBody List<IMedicosHorarios> cargaMedicosPorEspecialidad(@RequestParam(value = "espeId", required = true) Long espeId,
                                                                             @RequestParam(value = "fechaDia", required = true) String fechaDia) {
         var listaMedicos = horarioAtencionSvc.buscaMedicosPorEspecialidadFechaDia(espeId, fechaDia);
@@ -203,7 +203,7 @@ public class CitaMedicaController {
         return listaMedicos;
     }
 
-    @RequestMapping(value = "/cargahorariosPorEspecialidadFechaDiaMedico", method = RequestMethod.GET)
+    @GetMapping(value = "/cargahorariosPorEspecialidadFechaDiaMedico")
     public @ResponseBody List<IMedicosHorarios> cargahorariosPorEspecialidadFechaDiaMedico(@RequestParam(value = "espeId", required = true) Long espeId,
                                                                                            @RequestParam(value = "fechaDia", required = true) String fechaDia,
                                                                                            @RequestParam(value = "idMedico", required = true) Long idMedico) {
@@ -212,7 +212,7 @@ public class CitaMedicaController {
 
         return listaHorarios;
     }
-    @RequestMapping(value = "/buscarCitaPersonaEspecialidadFecha", method = RequestMethod.GET)
+    @GetMapping(value = "/buscarCitaPersonaEspecialidadFecha")
     public @ResponseBody List<ICitasMedicas> cargaCitaPersonaEspecialidadFecha(@RequestParam(value = "idPersona", required = true) Long idPersona,
                                                                                @RequestParam(value = "idEspecialidad", required = true) Long idEspecialidad,
                                                                                @RequestParam(value = "idHorario", required = true) Long idHorario) {
@@ -226,7 +226,7 @@ public class CitaMedicaController {
     }
 
 
-    @RequestMapping(value = "/agendarCita", method = RequestMethod.GET)
+    @GetMapping(value = "/agendarCita")
     public @ResponseBody String agendarCita(@RequestParam(value = "idPersona", required = true) Long idPersona,
                                             @RequestParam(value = "idEspecialidad", required = true) Long idEspecialidad,
                                             @RequestParam(value = "idMedico", required = true) Long idMedico,
@@ -250,7 +250,7 @@ public class CitaMedicaController {
         return "redirect:/cita/listar";
     }
 
-    @RequestMapping(value = "/agendarCitaPaciente", method = RequestMethod.GET)
+    @GetMapping(value = "/agendarCitaPaciente")
     public @ResponseBody String agendarCitaPaciente(@RequestParam(value = "idPersona", required = true) Long idPersona,
                                             @RequestParam(value = "idEspecialidad", required = true) Long idEspecialidad,
                                             @RequestParam(value = "idMedico", required = true) Long idMedico,
@@ -279,7 +279,7 @@ public class CitaMedicaController {
         return "redirect:/cita/listar";
     }
 
-    @RequestMapping(value = "/cancelaCitas", method = RequestMethod.GET)
+    @GetMapping(value = "/cancelaCitas")
     public @ResponseBody String cancelaCitas(@RequestParam(value = "idCita", required = true) Long id) {
 
         citaMedicaSvc.cancelarCita(id);
@@ -290,7 +290,7 @@ public class CitaMedicaController {
     }
 
 
-    @RequestMapping(value = "/buscaCitaPorIdHorario", method = RequestMethod.GET)
+    @GetMapping(value = "/buscaCitaPorIdHorario")
     public @ResponseBody List <CitaMedica> validaCitasHorario(@RequestParam(value = "idHorario", required = true) Long id) {
 
         return citaMedicaSvc.buscarCitaporId_Horario(id);
