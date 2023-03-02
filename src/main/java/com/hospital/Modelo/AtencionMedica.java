@@ -22,11 +22,20 @@ public class AtencionMedica extends Auditoria {
     @JoinColumn(name = "id_cita")
     private CitaMedica citaMedica;
 
+    @OneToOne(mappedBy = "atencionMedica" , cascade = CascadeType.ALL)
+    private DetalleClinico detalleClinico;
+
     public AtencionMedica() {
     }
 
+    public DetalleClinico getDetalleClinico() {
+        return detalleClinico;
+    }
 
-    
+    public void setDetalleClinico(DetalleClinico detalleClinico) {
+        this.detalleClinico = detalleClinico;
+    }
+
     public AtencionMedica(String motivoConsulta, String sintomas, String tratamiento, CitaMedica citaMedica) {
         this.motivoConsulta = motivoConsulta;
         this.sintomas = sintomas;

@@ -14,9 +14,21 @@ public class HistoriaClinica extends Auditoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+	@OneToOne
+	@JoinColumn(name = "id_persona")
+	private Persona persona;
     
     @OneToMany(fetch = FetchType.LAZY , mappedBy = "historia" , cascade = CascadeType.ALL)
     private List<DetalleClinico> detalles;
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
 
 	public List<DetalleClinico> getDetalles() {
 		return detalles;
@@ -30,7 +42,7 @@ public class HistoriaClinica extends Auditoria {
 		super();
 		this.detalles = detalles;
 	}
-    
-    
-    
+
+	public HistoriaClinica() {
+	}
 }

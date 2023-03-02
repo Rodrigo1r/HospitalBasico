@@ -36,6 +36,7 @@ public class DetalleClinico {
 		return historia;
 	}
 
+
 	public void setHistoria(HistoriaClinica historia) {
 		this.historia = historia;
 	}
@@ -47,9 +48,7 @@ public class DetalleClinico {
 	public void setAtencionMedica(AtencionMedica atencionMedica) {
 		this.atencionMedica = atencionMedica;
 	}
-	
-	
-    
-    
 
+	public DetalleClinico() {
+	}
 }

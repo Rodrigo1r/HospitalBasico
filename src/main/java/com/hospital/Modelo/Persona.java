@@ -5,15 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -81,6 +73,16 @@ public class Persona extends Auditoria implements Serializable {
     })
     private List<HorarioAtencion> horarios;
 
+    @OneToOne(mappedBy = "persona" , cascade = CascadeType.ALL)
+    private HistoriaClinica historiaClinica;
+
+    public HistoriaClinica getHistoriaClinica() {
+        return historiaClinica;
+    }
+
+    public void setHistoriaClinica(HistoriaClinica historiaClinica) {
+        this.historiaClinica = historiaClinica;
+    }
 
     @Column(name = "estado")
     private Boolean estado;
