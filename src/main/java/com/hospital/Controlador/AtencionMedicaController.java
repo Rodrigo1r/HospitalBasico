@@ -86,7 +86,7 @@ public class AtencionMedicaController {
         var cita = citaMedicaSvc.buscarCitaMedicaPorId(id);
         cita.setAtencionMedica(atencion);
         cita.setAtencion(true);
-        //atencion.setFechaAtencion(LocalDate.now());
+
         atencion.setCitaMedica(cita);
         citaMedicaSvc.actualizar(cita);
 
