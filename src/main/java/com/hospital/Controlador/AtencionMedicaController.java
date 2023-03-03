@@ -1,6 +1,8 @@
 package com.hospital.Controlador;
 
 import com.hospital.Modelo.AtencionMedica;
+import com.hospital.Modelo.DetalleClinico;
+import com.hospital.Modelo.HistoriaClinica;
 import com.hospital.Modelo.Persona;
 import com.hospital.Servicio.AtencionMedicaServicio;
 import com.hospital.Servicio.CitaMedicaServicio;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/atencion")
@@ -87,7 +91,30 @@ public class AtencionMedicaController {
         cita.setAtencionMedica(atencion);
         cita.setAtencion(true);
 
+
         atencion.setCitaMedica(cita);
+        //Agregamos nuevo detalle clinico que basicamente es lo mismo que la atencion medica
+        DetalleClinico dt = new DetalleClinico();
+        dt.setAtencionMedica(atencion);
+        //A atencion le asigno el detalle clinico
+        atencion.setDetalleClinico(dt);
+        //Si el paciente no tiene historia clinica, entocnes le creo una nueva y le asigno el detalle clinico
+        //Pero si el paciente ya cuenta con uan historia clinica, simplemente le agrego el nuevo detalle clinico
+        var persona =personaSvc.buscaPersonaPorId(cita.getId_persona());
+        List<DetalleClinico> ldc = new ArrayList<DetalleClinico>();
+        if(persona.getHistoriaClinica() == null){
+            HistoriaClinica hc = new HistoriaClinica();
+            ldc.add(dt);
+            hc.setDetalles(ldc);
+            persona.setHistoriaClinica(hc);
+
+        }else{
+            ldc= persona.getHistoriaClinica().getDetalles();
+            ldc.add(dt);
+            persona.getHistoriaClinica().setDetalles(ldc);
+        }
+
+        personaSvc.actualizarPersona(persona);
         citaMedicaSvc.actualizar(cita);
 
         return "redirect:/atencion/listar";

@@ -16,7 +16,7 @@ public interface CitaMedicaRepositorio extends JpaRepository<CitaMedica, Long> {
             "e.id_medico , d.nombre_especialidad , a.id as id_horario , a.horario ,e.nombre_medico ,e.estado ,e.atencion " +
             "from horario_atencion a , persona_horarios b , persona c , especialidad d ,  " +
             "cita_medica e where (d.id = e.id_especialidad and c.id = e.id_persona and " +
-            "a.id = e.id_horario and e.estado = true and e.atencion = :estadoAtencion) order by a.fecha_dia", nativeQuery = true)
+            "a.id = e.id_horario and e.estado = true and  a.fecha_dia >= CURRENT_DATE and e.atencion = :estadoAtencion) order by a.fecha_dia", nativeQuery = true)
     public List<ICitasMedicas> listadoCitasPorAtencion(Boolean estadoAtencion);
 
 
