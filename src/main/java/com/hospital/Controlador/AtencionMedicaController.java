@@ -6,6 +6,7 @@ import com.hospital.Modelo.HistoriaClinica;
 import com.hospital.Modelo.Persona;
 import com.hospital.Servicio.AtencionMedicaServicio;
 import com.hospital.Servicio.CitaMedicaServicio;
+import com.hospital.Servicio.HistoriaClinicaServicio;
 import com.hospital.Servicio.PersonaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -34,6 +35,9 @@ public class AtencionMedicaController {
 
     @Autowired
     PersonaServicio personaSvc;
+
+    @Autowired
+    HistoriaClinicaServicio historiaSvc;
 
 
     @GetMapping("/listar")
@@ -97,29 +101,31 @@ public class AtencionMedicaController {
 
         //Agregamos nuevo detalle clinico que basicamente es el Id de la atencion medica
         var atencionMd = atencionMedicaSvc.buscaAtencionPorIdCIta(id);
-        DetalleClinico dt = new DetalleClinico();
-        dt.setIdAtencion(atencionMd.getId());
+        DetalleClinico detClin = new DetalleClinico();
+        detClin.setIdAtencion(atencionMd.getId());
 
         //Si el paciente no tiene historia clinica, entocnes le creo una nueva y le asigno el detalle clinico
         //Pero si el paciente ya cuenta con uan historia clinica, simplemente le agrego el nuevo detalle clinico
         var persona =personaSvc.buscaPersonaPorId(cita.getId_persona());
         List<DetalleClinico> ldc = new ArrayList<DetalleClinico>();
-        if(persona.getHistoriaClinica() == null){
-            HistoriaClinica hc = new HistoriaClinica();
-            //dt.setHistoria(hc);
-            ldc.add(dt);
-            hc.setDetalles(ldc);
-            //hc.setPersona(persona);
-
-            persona.setHistoriaClinica(hc);
+        HistoriaClinica hc = new HistoriaClinica();
+        
+        if(persona.getHistoria() == null){
+            detClin.setHistoria(hc);
+            ldc.add(detClin);
+            hc.setDetalle(ldc);
+            persona.setHistoria(hc);
 
         }else{
-            ldc= persona.getHistoriaClinica().getDetalles();
-            ldc.add(dt);
-            persona.getHistoriaClinica().setDetalles(ldc);
+            hc = persona.getHistoria();
+            ldc= persona.getHistoria().getDetalle();
+            detClin.setHistoria(persona.getHistoria());
+            ldc.add(detClin);
+            hc.setDetalle(ldc);
+            
         }
 
-        personaSvc.actualizarPersona(persona);
+        historiaSvc.grabar(hc);
 
 
         return "redirect:/atencion/listar";
