@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,6 +23,7 @@ public class Persona extends Auditoria implements Serializable {
     private Long id;
 
     @Column(name = "identificacion", unique = true, length = 10)
+    @Pattern(regexp = "[0-9]+", message="La identificación solo puede contenener números")
     private String identificacion;
 
     @Column(name = "nombres")
@@ -73,7 +75,11 @@ public class Persona extends Auditoria implements Serializable {
     })
     private List<HorarioAtencion> horarios;
 
-    @OneToOne(mappedBy = "persona" , cascade = CascadeType.ALL)
+    //mappedBy = "persona" , cascade = CascadeType.ALL)
+    @OneToOne(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     private HistoriaClinica historiaClinica;
 
     public HistoriaClinica getHistoriaClinica() {

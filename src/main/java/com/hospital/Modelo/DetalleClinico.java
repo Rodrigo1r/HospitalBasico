@@ -22,31 +22,36 @@ public class DetalleClinico {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_historia")
     private HistoriaClinica historia;
-    
-    @OneToOne
-    @JoinColumn(name = "id_atencion")
-    private AtencionMedica atencionMedica;
 
-	public DetalleClinico(HistoriaClinica historia, AtencionMedica atencionMedica) {
-		this.historia = historia;
-		this.atencionMedica = atencionMedica;
-	}
+    private Long idAtencion;
+
 
 	public HistoriaClinica getHistoria() {
 		return historia;
 	}
 
-
 	public void setHistoria(HistoriaClinica historia) {
 		this.historia = historia;
 	}
 
-	public AtencionMedica getAtencionMedica() {
-		return atencionMedica;
+
+
+	public Long getIdAtencion() {
+		return idAtencion;
 	}
 
-	public void setAtencionMedica(AtencionMedica atencionMedica) {
-		this.atencionMedica = atencionMedica;
+	public void setIdAtencion(Long idAtencion) {
+		this.idAtencion = idAtencion;
+	}
+
+	public DetalleClinico(HistoriaClinica historia, Long idAtencion) {
+		this.historia = historia;
+		this.idAtencion = idAtencion;
+	}
+
+
+	public DetalleClinico( Long idAtencion) {
+		this.idAtencion = idAtencion;
 	}
 
 	public DetalleClinico() {

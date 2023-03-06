@@ -13,7 +13,7 @@ HorarioAtencionRepositorio extends JpaRepository<HorarioAtencion, Long> {
 
     @Query(value = "select a.fecha_dia , a.horario , a.activo , a.asignado , p.nombres , p.apellidos , a.id " +
             "from horario_atencion a , persona p , persona_horarios b where (p.id = b.persona_id AND " +
-            "a.id = b.horarios_id) order by a.id", nativeQuery = true)
+            "a.id = b.horarios_id and a.fecha_dia >= CURRENT_DATE) order by a.id", nativeQuery = true)
     public List<IMedicosHorarios> buscarMedicosHorarios();
 
 
