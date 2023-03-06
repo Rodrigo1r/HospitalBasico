@@ -64,4 +64,8 @@ public class AtencionMedicaServicio {
     public List<ICitasMedicas> totalAtencionesPorMes(){
         return atencionMedicaRpt.totalAtencionesPorMes();
     }
+
+    public AtencionMedica buscaAtencionPorIdCIta(Long idCIta){
+        return atencionMedicaRpt.findAtencionMedicaByCitaMedica(idCIta);
+    }
 }

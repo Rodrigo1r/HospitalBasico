@@ -39,5 +39,8 @@ public Integer  totalAtencionesAnioAnterior();
     public List<ICitasMedicas> totalAtencionesPorMes();
 
 
+    @Query(value = "select *  from  " +
+            "atencion_medica a where a.id_cita = :citaMedica " , nativeQuery = true)
+    public AtencionMedica findAtencionMedicaByCitaMedica(Long citaMedica);
 
 }

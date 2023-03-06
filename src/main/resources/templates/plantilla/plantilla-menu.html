@@ -57,7 +57,7 @@
 				class="d-none d-lg-block">Hospital Básico</span>
 			</a> <i class="bi bi-list toggle-sidebar-btn"></i>
 		</div>
-		<!-- End Logo -->
+		<!-- End Logo  Este codigo se puede descomentar para implemantar alguna busqueda
 
 		<div class="search-bar">
 			<form class="search-form d-flex align-items-center" method="POST"
@@ -69,6 +69,7 @@
 				</button>
 			</form>
 		</div>
+
 		<!-- End Search Bar -->
 
 		<nav class="header-nav ms-auto">
@@ -88,8 +89,7 @@
 					<ul
 						class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
 						<li class="dropdown-header">Tienes 4 notificaciones nuevas <a
-							href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View
-									all</span></a>
+							href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todo</span></a>
 						</li>
 						<li>
 							<hr class="dropdown-divider">
@@ -128,8 +128,7 @@
 					<ul
 						class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
 						<li class="dropdown-header">Tienes 3 nuevos mensajes <a
-							href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View
-									all</span></a>
+							href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todo</span></a>
 						</li>
 						<li>
 							<hr class="dropdown-divider">
@@ -174,7 +173,7 @@
 						</li>
 
 						<li><a class="dropdown-item d-flex align-items-center"
-							href="users-profile.html"> <i class="bi bi-person"></i> <span>Mi
+							   th:href="@{/persona/perfil}"> <i class="bi bi-person"></i> <span th:action="@{/persona/perfil}">Mi
 									Perfil</span>
 						</a></li>
 						<li>
@@ -182,7 +181,7 @@
 						</li>
 
 						<li><a class="dropdown-item d-flex align-items-center"
-							href="users-profile.html"> <i class="bi bi-gear"></i> <span>Configurar
+							   th:href="@{/persona/perfil}"> <i class="bi bi-gear"></i> <span th:action="@{/persona/perfil}">Configurar
 									Cuenta</span>
 						</a></li>
 						<li>
@@ -358,12 +357,12 @@
 			<li class="nav-heading" th:fragment="navPerfil">Mis Datos</li>
 
 			<li class="nav-item"><a class="nav-link collapsed"
-				href="users-profile.html"> <i class="bi bi-person"></i> <span>Perfil</span>
+				th:href="@{/persona/perfil}"> <i class="bi bi-person"></i> <span>Perfil</span>
 			</a></li>
 			<!-- End Profile Page Nav -->
 
 			<li class="nav-item"><a class="nav-link collapsed"
-				href="pages-contact.html"> <i class="bi bi-envelope"></i> <span>Contactenos</span>
+			th:href="@{/contactenos}"> <i class="bi bi-envelope"></i> <span>Contactenos</span>
 			</a></li>
 			<!-- End Contact Page Nav -->
 

@@ -54,6 +54,7 @@
 											<input type="text" name="identificacion" class="form-control"
 												id="identificacion" required th:field="*{identificacion}"
 												autofocus>
+											<small class="form-text text-danger" th:if="${#fields.hasErrors('identificacion')}" th:errors="*{identificacion}"></small>
 											<div class="invalid-feedback">Por favor, ingrese su
 												identificacion!</div>
 										</div>

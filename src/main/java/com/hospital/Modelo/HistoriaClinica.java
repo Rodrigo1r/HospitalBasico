@@ -18,13 +18,21 @@ public class HistoriaClinica extends Auditoria {
 	@OneToOne
 	@JoinColumn(name = "id_persona")
 	private Persona persona;
-    
-    @OneToMany(fetch = FetchType.LAZY , mappedBy = "historia" , cascade = CascadeType.ALL)
+
+
+
+	//fetch = FetchType.LAZY , mappedBy = "historia" , cascade =CascadeType.ALL)
+    @OneToMany(cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+	})
     private List<DetalleClinico> detalles;
 
 	public Persona getPersona() {
 		return persona;
 	}
+
+
 
 	public void setPersona(Persona persona) {
 		this.persona = persona;

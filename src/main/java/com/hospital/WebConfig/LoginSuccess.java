@@ -30,7 +30,7 @@ public class LoginSuccess  {
 	        http.authorizeRequests().antMatchers("/", "/assets/**", "/persona/registro").permitAll()
 					// Para que solo un usuario logueado con esos roles acceda a /home
 					//.antMatchers("/home").access("hasRole('[PACIENTE]') or hasRole('[ADMINISTRADOR]')")
-					.antMatchers("/home").hasAnyAuthority("PACIENTE","ADMINISTRADOR" , "MEDICO")
+					.antMatchers("/home").hasAnyAuthority("PACIENTE","ADMINISTRADOR" , "MEDICO","SECRETARIA")
 					// Para que solo un usuario logueado con esos roles vea la lista de productos
 					.antMatchers("/persona/agregar").hasAnyAuthority("ADMINISTRADOR", "SECRETARIA")
 					.antMatchers("/persona/editar/**").hasAnyAuthority("ADMINISTRADOR", "SECRETARIA")

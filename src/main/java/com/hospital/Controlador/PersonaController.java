@@ -7,6 +7,8 @@ import com.hospital.Servicio.EspecialidadServicio;
 import com.hospital.Servicio.RolServicio;
 import com.hospital.Util.NombresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +33,21 @@ public class PersonaController {
 
     @Autowired
     EspecialidadServicio especialidadServicio;
+
+
+    @GetMapping("/perfil")
+    public String perfilPersona(Model model, HttpSession session) {
+        model.addAttribute("dpersona", session.getAttribute("datoUser"));
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Persona persona = new Persona();
+        if(auth !=null){
+            persona = personaServicio.buscaPersonaPorUsuario(auth.getName());
+        }
+
+        model.addAttribute("usuario", persona);
+        return "persona/perfil/perfil-usuario";
+    }
 
     @GetMapping("/registro")
     public String nuevaPersona(Model model, HttpSession session) {

@@ -93,19 +93,24 @@ public class AtencionMedicaController {
 
 
         atencion.setCitaMedica(cita);
-        //Agregamos nuevo detalle clinico que basicamente es lo mismo que la atencion medica
+        citaMedicaSvc.actualizar(cita);
+
+        //Agregamos nuevo detalle clinico que basicamente es el Id de la atencion medica
+        var atencionMd = atencionMedicaSvc.buscaAtencionPorIdCIta(id);
         DetalleClinico dt = new DetalleClinico();
-        dt.setAtencionMedica(atencion);
-        //A atencion le asigno el detalle clinico
-        atencion.setDetalleClinico(dt);
+        dt.setIdAtencion(atencionMd.getId());
+
         //Si el paciente no tiene historia clinica, entocnes le creo una nueva y le asigno el detalle clinico
         //Pero si el paciente ya cuenta con uan historia clinica, simplemente le agrego el nuevo detalle clinico
         var persona =personaSvc.buscaPersonaPorId(cita.getId_persona());
         List<DetalleClinico> ldc = new ArrayList<DetalleClinico>();
         if(persona.getHistoriaClinica() == null){
             HistoriaClinica hc = new HistoriaClinica();
+            //dt.setHistoria(hc);
             ldc.add(dt);
             hc.setDetalles(ldc);
+            //hc.setPersona(persona);
+
             persona.setHistoriaClinica(hc);
 
         }else{
@@ -115,7 +120,7 @@ public class AtencionMedicaController {
         }
 
         personaSvc.actualizarPersona(persona);
-        citaMedicaSvc.actualizar(cita);
+
 
         return "redirect:/atencion/listar";
 
