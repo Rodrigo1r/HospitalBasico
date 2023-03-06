@@ -1,12 +1,16 @@
 package com.hospital.Modelo;
 
 import java.util.List;
-
+import lombok.*;
 
 import javax.persistence.*;
 
 
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "historia_clinica")
 public class HistoriaClinica extends Auditoria {
@@ -15,42 +19,13 @@ public class HistoriaClinica extends Auditoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	@OneToOne
-	@JoinColumn(name = "id_persona")
+	@OneToOne(mappedBy = "historia" , cascade =CascadeType.ALL)
 	private Persona persona;
 
 
-
 	//fetch = FetchType.LAZY , mappedBy = "historia" , cascade =CascadeType.ALL)
-    @OneToMany(cascade = {
-			CascadeType.PERSIST,
-			CascadeType.MERGE
-	})
-    private List<DetalleClinico> detalles;
+    @OneToMany(mappedBy = "historia" , cascade =CascadeType.ALL)
+    private List<DetalleClinico> detalle;
 
-	public Persona getPersona() {
-		return persona;
-	}
-
-
-
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
-
-	public List<DetalleClinico> getDetalles() {
-		return detalles;
-	}
-
-	public void setDetalles(List<DetalleClinico> detalles) {
-		this.detalles = detalles;
-	}
-
-	public HistoriaClinica(List<DetalleClinico> detalles) {
-		super();
-		this.detalles = detalles;
-	}
-
-	public HistoriaClinica() {
-	}
+	
 }
