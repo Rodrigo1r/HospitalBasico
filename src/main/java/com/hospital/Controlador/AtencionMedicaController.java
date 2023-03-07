@@ -99,6 +99,8 @@ public class AtencionMedicaController {
         atencion.setCitaMedica(cita);
         citaMedicaSvc.actualizar(cita);
 
+        
+
         //Agregamos nuevo detalle clinico que basicamente es el Id de la atencion medica
         var atencionMd = atencionMedicaSvc.buscaAtencionPorIdCIta(id);
         DetalleClinico detClin = new DetalleClinico();
@@ -112,20 +114,30 @@ public class AtencionMedicaController {
         
         if(persona.getHistoria() == null){
             detClin.setHistoria(hc);
+            //Esto agregue
+            detClin.setAtencion(atencion);
+
             ldc.add(detClin);
             hc.setDetalle(ldc);
             hc.setPersona(persona);
             persona.setHistoria(hc);
 
         }else{
+            //Caso contrario, significa que este paciente ya cuenta con historia clinica
+            //Obtenemos sus historia clinaca actual, y sobre esta trabajamos
             hc = persona.getHistoria();
             ldc= persona.getHistoria().getDetalle();
             detClin.setHistoria(persona.getHistoria());
+            //Esto agregue
+            detClin.setAtencion(atencion);
+
+
             ldc.add(detClin);
             hc.setDetalle(ldc);
             
         }
 
+        //Por ultimo guardamos la historia clinica, que en cascada actualiza la persona y el detalle
         historiaSvc.grabar(hc);
 
 
@@ -133,17 +145,15 @@ public class AtencionMedicaController {
 
     }
 
-    @GetMapping("/historia")
-    public String historial(Model model, HttpSession session) {
+    @GetMapping("/historia/{id}")
+    public String historial(@PathVariable long id,Model model, HttpSession session) {
         model.addAttribute("dpersona", session.getAttribute("datoUser"));
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Persona persona = new Persona();
-        if(auth !=null){
-            persona = personaSvc.buscaPersonaPorUsuario(auth.getName());
-        }
+        var paciente = personaSvc.buscaPersonaPorId(id);
 
-        var lista = citaMedicaSvc.listadoCitasPorMedicoAtencion(persona.getId(),false);
+
+
+        var lista = paciente.getHistoria().getDetalle();
         model.addAttribute("lista", lista);
         return "atencion/lista-historial-clinico";
     }

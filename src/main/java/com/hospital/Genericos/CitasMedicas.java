@@ -2,10 +2,14 @@ package com.hospital.Genericos;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
+@Getter
+@Setter
 public class CitasMedicas {
 
     private Long id_horario;
@@ -34,108 +38,10 @@ public class CitasMedicas {
 
     private String mes;
 
-    public String getMes() {
-        return mes;
-    }
-
-    public void setMes(String mes) {
-        this.mes = mes;
-    }
-
-    public Long getId_horario() {
-        return id_horario;
-    }
-
-    public void setId_horario(Long id_horario) {
-        this.id_horario = id_horario;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public Long getId_cita() {
-        return id_cita;
-    }
-
-    public Long getId_persona() {
-        return id_persona;
-    }
-
-    public String getNombre_especialidad() {
-        return nombre_especialidad;
-    }
-
-    public LocalTime getHorario() {
-        return horario;
-    }
-
-    public Long getId_medico() {
-        return id_medico;
-    }
-
-    public String getNombre_medico() {
-        return nombre_medico;
-    }
-
-    public LocalDate getFecha_dia() {
-        return fecha_dia;
-    }
-
-    public Boolean getEstado() {
-        return estado;
-    }
+    private String motivo;
+    private String sintomas;
+    private String tratamiento;
 
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public void setId_cita(Long id_cita) {
-        this.id_cita = id_cita;
-    }
-
-    public void setId_persona(Long id_persona) {
-        this.id_persona = id_persona;
-    }
-
-    public void setNombre_especialidad(String nombre_especialidad) {
-        this.nombre_especialidad = nombre_especialidad;
-    }
-
-    public void setHorario(LocalTime horario) {
-        this.horario = horario;
-    }
-
-    public void setId_medico(Long id_medico) {
-        this.id_medico = id_medico;
-    }
-
-    public void setNombre_medico(String nombre_medico) {
-        this.nombre_medico = nombre_medico;
-    }
-
-    public void setFecha_dia(LocalDate fecha_dia) {
-        this.fecha_dia = fecha_dia;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
+   
 }

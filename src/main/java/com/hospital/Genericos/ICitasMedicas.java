@@ -30,4 +30,8 @@ public interface ICitasMedicas {
     public Integer getCantidad();
     public String getMes();
 
+    public String getMotivo();
+    public String getSintomas();
+    public String getTratamiento();
+
 }
