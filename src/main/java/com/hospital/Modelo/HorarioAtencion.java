@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "horarioAtencion")
-public class HorarioAtencion {
+public class HorarioAtencion extends Auditoria  {
 
 
     @Id

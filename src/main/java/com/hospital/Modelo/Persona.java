@@ -15,7 +15,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "persona")
 public class Persona extends Auditoria implements Serializable {
@@ -27,7 +26,6 @@ public class Persona extends Auditoria implements Serializable {
     private Long id;
 
     @Column(name = "identificacion", unique = true, length = 10)
-    @Pattern(regexp = "[0-9]", message="La identificación solo puede contenener números")
     private String identificacion;
 
     @Column(name = "nombres")
@@ -84,7 +82,7 @@ public class Persona extends Auditoria implements Serializable {
 
      //mappedBy = "persona" , cascade = CascadeType.ALL)
      @OneToOne
-     @JoinColumn(name = "id_persona")
+     @JoinColumn(name = "id_historia")
      private HistoriaClinica historia;
 
 

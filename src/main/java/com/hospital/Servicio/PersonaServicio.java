@@ -28,6 +28,7 @@ public class PersonaServicio {
     private BCryptPasswordEncoder passwordEncoder;
 
     public Persona insertar(Persona persona) {
+        persona.setEstado(true);
         persona.setPassword(passwordEncoder.encode(persona.getPassword()));
         return personaRepo.save(persona);
     }

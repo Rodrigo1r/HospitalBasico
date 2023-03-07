@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "cita_medica")
-public class CitaMedica {
+public class CitaMedica extends Auditoria  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

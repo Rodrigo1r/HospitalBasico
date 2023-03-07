@@ -46,6 +46,9 @@ public class Runner implements CommandLineRunner {
 			persona.setCorreo("Rodrigo1r@hotmail.com");
 			persona.setTelefono("0986937694");
 			persona.setGenero("Masculino");
+			persona.setEstado(true);
+			persona.setCreadoPor("admin");
+			persona.setModificadoPor("admin");
 			persona.setLugar_residencia("Guayaquil");
 			String fechaString = "1985-05-01";
 			SimpleDateFormat fechaFormato = new SimpleDateFormat("yyyy-MM-dd");
@@ -55,7 +58,6 @@ public class Runner implements CommandLineRunner {
 			persona.setPassword("administrador");
 
 			persona.setRoles(List.of( new  Rol(NombresRoles.ADMINISTRADOR,true)));
-
 
 			personaServicio.insertar(persona);
 

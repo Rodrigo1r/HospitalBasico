@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "historia_clinica")
 public class HistoriaClinica extends Auditoria {

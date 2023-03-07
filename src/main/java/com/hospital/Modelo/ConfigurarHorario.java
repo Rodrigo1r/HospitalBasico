@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "configurar_horario")
-public class ConfigurarHorario {
+public class ConfigurarHorario extends Auditoria {
 
    
 

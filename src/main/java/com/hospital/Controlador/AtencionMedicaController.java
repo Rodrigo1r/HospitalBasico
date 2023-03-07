@@ -114,6 +114,7 @@ public class AtencionMedicaController {
             detClin.setHistoria(hc);
             ldc.add(detClin);
             hc.setDetalle(ldc);
+            hc.setPersona(persona);
             persona.setHistoria(hc);
 
         }else{
@@ -130,6 +131,21 @@ public class AtencionMedicaController {
 
         return "redirect:/atencion/listar";
 
+    }
+
+    @GetMapping("/historia")
+    public String historial(Model model, HttpSession session) {
+        model.addAttribute("dpersona", session.getAttribute("datoUser"));
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Persona persona = new Persona();
+        if(auth !=null){
+            persona = personaSvc.buscaPersonaPorUsuario(auth.getName());
+        }
+
+        var lista = citaMedicaSvc.listadoCitasPorMedicoAtencion(persona.getId(),false);
+        model.addAttribute("lista", lista);
+        return "atencion/lista-historial-clinico";
     }
 
 

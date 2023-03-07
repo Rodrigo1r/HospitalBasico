@@ -14,10 +14,9 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "detalle_clinico")
-public class DetalleClinico {
+public class DetalleClinico extends Auditoria {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
