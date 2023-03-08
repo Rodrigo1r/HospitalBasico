@@ -39,14 +39,18 @@ public Integer  totalAtencionesAnioAnterior();
     public List<ICitasMedicas> totalAtencionesPorMes();
 
 
+    @Query(value = "select to_char(a.fecha_creacion , 'TMMonth') as mes , count(a.id) as cantidad from " +
+    "atencion_medica a GROUP by mes order by mes" , nativeQuery = true)
+public List<ICitasMedicas> detalleAtencionMesCantidad();
+
     @Query(value = "select *  from  " +
             "atencion_medica a where a.id_cita = :citaMedica " , nativeQuery = true)
     public AtencionMedica findAtencionMedicaByCitaMedica(Long citaMedica);
 
     @Query(value = "SELECT a.fecha_creacion  AS fecha_dia, a.motivo_consulta AS motivo , a.sintomas , a.tratamiento ," +
-            "c.descripcion_especialidad as nombre_especialidad, b.nombre_medico FROM "+
-            "atencion_medica a  , cita_medica b , especialidad C , detalle_clinico d  WHERE a.id_cita = b.id "+
-            "AND b.id_especialidad = c.id AND d.id_atencion = a.id AND  d.id_historia = :id ORDER BY fecha_dia DESC " , nativeQuery = true)
-    public List<ICitasMedicas> listaHistoriaPorIdPaciente(Long id);
+    "c.descripcion_especialidad as nombre_especialidad, b.nombre_medico FROM "+
+    "atencion_medica a  , cita_medica b , especialidad C , detalle_clinico d  WHERE a.id_cita = b.id "+
+    "AND b.id_especialidad = c.id AND d.id_atencion = a.id AND  d.id_historia = :id ORDER BY fecha_dia DESC " , nativeQuery = true)
+public List<ICitasMedicas> listaHistoriaPorIdPaciente(Long id);
 
 }

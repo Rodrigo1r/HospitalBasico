@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 import lombok.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -77,7 +76,7 @@ public class Persona extends Auditoria implements Serializable {
     })
     private List<HorarioAtencion> horarios;
 
-    @Column(name = "estado")
+    @Column(name = "estado" , nullable = false)
     private Boolean estado;
 
      //mappedBy = "persona" , cascade = CascadeType.ALL)

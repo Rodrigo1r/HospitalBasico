@@ -39,6 +39,7 @@ public class PersonaServicio {
         var validaPass = pAnterior.get().getPassword().isEmpty();
         if((persona.getPassword().isEmpty() && !validaPass) ){
             persona.setPassword(pAnterior.get().getPassword());
+            persona.setEstado(pAnterior.get().getEstado());
         }
 
         else{

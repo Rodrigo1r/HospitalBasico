@@ -19,12 +19,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <main id="main" class="main">
 
       <div class="pagetitle">
-        <h1>Chart.js</h1>
+        <h1>Información Atenciones</h1>
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item">Charts</li>
-            <li class="breadcrumb-item active">Chart.js</li>
+            <li class="breadcrumb-item">Atenciones</li>
+
           </ol>
         </nav>
       </div><!-- End Page Title -->
@@ -36,19 +36,26 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Line Chart</h5>
+                <h5 class="card-title">Atenciones por mes</h5>
+
+
 
                 <!-- Line Chart -->
                 <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                <script th:inline="javascript">
+                  var vatCantidad = [[${atencionCantidad}]]
+                  var vatMes = [[${atencionMes}]]
+                </script>
+
                 <script>
                   document.addEventListener("DOMContentLoaded", () => {
                     new Chart(document.querySelector('#lineChart'), {
                       type: 'line',
                       data: {
-                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        labels: vatMes, // ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
                         datasets: [{
-                          label: 'Line Chart',
-                          data: [65, 59, 80, 81, 56, 55, 40],
+                          label: 'Grafica de líneas',
+                          data: vatCantidad , //[65, 59, 80, 81, 56, 55, 40],
                           fill: false,
                           borderColor: 'rgb(75, 192, 192)',
                           tension: 0.1
@@ -73,7 +80,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Bar CHart</h5>
+                <h5 class="card-title">Atenciones por mes</h5>
 
                 <!-- Bar Chart -->
                 <canvas id="barChart" style="max-height: 400px;"></canvas>
@@ -82,10 +89,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     new Chart(document.querySelector('#barChart'), {
                       type: 'bar',
                       data: {
-                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        labels: vatMes,// ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
                         datasets: [{
-                          label: 'Bar Chart',
-                          data: [65, 59, 80, 81, 56, 55, 40],
+                          label: 'Grafica de Barras',
+                          data: vatCantidad,// [65, 59, 80, 81, 56, 55, 40],
                           backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(255, 159, 64, 0.2)',

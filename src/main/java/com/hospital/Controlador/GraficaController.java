@@ -133,8 +133,12 @@ public class GraficaController {
     public String graficaCitas(Model model, HttpSession session) {
         model.addAttribute("dpersona", session.getAttribute("datoUser"));
         model.addAttribute("configuracion", new ConfigurarHorario());
-        var dias = DiasSemana.listaDias();
-        model.addAttribute("listaDias", dias);
+        
+        var ctNombreMes = citaMedicaSvc.totalCitasPorMes().stream().map(x->x.getMes()).collect(Collectors.toList());
+        var ctCantidadMes = citaMedicaSvc.totalCitasPorMes().stream().map(x->x.getCantidad()).collect(Collectors.toList());
+        
+        model.addAttribute("ctNombreMes", ctNombreMes);
+        model.addAttribute("ctCantidadMes", ctCantidadMes);
         
         return "grafica/graficas_citas";
     }
@@ -143,8 +147,16 @@ public class GraficaController {
     public String graficaAtenciones(Model model, HttpSession session) {
         model.addAttribute("dpersona", session.getAttribute("datoUser"));
         model.addAttribute("configuracion", new ConfigurarHorario());
+        
+
+        var atencionMes = atencionMedicaSvc.detalleAtencionMesCantidad().stream().map(x->x.getMes()).collect(Collectors.toList());
+        var atencionCantidad = atencionMedicaSvc.detalleAtencionMesCantidad().stream().map(x->x.getCantidad()).collect(Collectors.toList());
+        
+
         var dias = DiasSemana.listaDias();
         model.addAttribute("listaDias", dias);
+        model.addAttribute("atencionMes", atencionMes);
+        model.addAttribute("atencionCantidad", atencionCantidad);
         return "grafica/graficas_atenciones";
     }
 

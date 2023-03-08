@@ -77,4 +77,8 @@ public class AtencionMedicaServicio {
         return null;
     }
 
+    public List<ICitasMedicas> detalleAtencionMesCantidad(){
+        return atencionMedicaRpt.detalleAtencionMesCantidad();
+    }
+
 }
