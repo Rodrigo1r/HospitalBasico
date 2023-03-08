@@ -54,10 +54,10 @@
                             <tr th:each="especialidad : ${lista}">
                                 <td th:text="${especialidad.nombreEspecialidad}">
                                 <td th:text="${especialidad.estado} ? 'Activa' : 'No Activa'">
-                                <td th:text="${especialidad.usuarioCreacion}">
-                                <td th:text="${#dates.format(especialidad.fecha_registro,'yyyy-MM-dd')}">
-                                <td th:text="${especialidad.usuarioModificacion}">
-                                <td th:text="${#dates.format(especialidad.fecha_modificacion,'yyyy-MM-dd')}">
+                                <td th:text="${especialidad.creadoPor}">
+                                <td th:text="${#temporals.format(especialidad.fechaCreacion ,'yyyy-MM-dd')}">
+                                <td th:text="${especialidad.modificadoPor}">
+                                <td th:text="${#temporals.format(especialidad.fechaModificacion,'yyyy-MM-dd')}">
 
                                 <td><a class="btn btn-info"
                                        th:href="@{/especialidad/editar/{id}(id=${especialidad.id})}" href="#">Editar</a>

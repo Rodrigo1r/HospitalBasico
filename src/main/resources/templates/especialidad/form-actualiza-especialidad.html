@@ -47,21 +47,11 @@
 										th:object="${especialidad}">
 
 										<input  id="id " th:field="*{id}" type="hidden">
-										<input  id="usuarioCreacion" th:field="*{usuarioCreacion}" type="hidden">
-										<input  id="fecha_registro" th:field="*{fecha_registro}" type="hidden">
 
-										<div class="col-3">
-											<label for="usuarioModificacion" class="form-label">Usuario Modificacion</label>
-											<input type="text" style="background:#e6e6e6"  name="usuarioModificacion" th:value="${#authentication.name}" class="form-control"
-												   id="usuarioModificacion" readonly>
-										</div>
 
-										<div class="col-3">
-											<label for="fecha_modificacion" class="form-label">Fecha de Modificacion</label>
-											<input type="text" style="background:#e6e6e6"  name="fecha_modificacion" th:value="${#dates.format(#dates.createNow() , 'yyyy-MM-dd')}" class="form-control"
-												   id="fecha_modificacion" readonly>
-										</div>
-										<p></p>
+
+
+
 
 										<div class="col-4">
 											<label for="nombreEspecialidad" class="form-label">Nombre Especialidad</label> <input

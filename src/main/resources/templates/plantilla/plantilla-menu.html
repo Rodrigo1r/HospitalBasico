@@ -70,7 +70,7 @@
 			</form>
 		</div>
 
-		<!-- End Search Bar -->
+		End Search Bar -->
 
 		<nav class="header-nav ms-auto">
 			<ul class="d-flex align-items-center">
@@ -152,13 +152,13 @@
 					</ul> <!-- End Messages Dropdown Items --></li>
 				<!-- End Messages Nav -->
 
-				<li class="nav-item dropdown pe-3"><a
+				<li class="nav-item dropdown pe-3" sec:authorize="isAuthenticated()"><a
 					class="nav-link nav-profile d-flex align-items-center pe-0"
 					href="#" data-bs-toggle="dropdown"> <img
 						th:src="@{/assets/img/profile-img.jpg}" alt="Profile"
 						class="rounded-circle"> <span
 						class="d-none d-md-block dropdown-toggle ps-2"
-						th:text="${dpersona.nombres}">usuario</span>
+						 th:text="${dpersona.nombres}">usuario</span>
 				</a> <!-- End Profile Iamge Icon -->
 
 					<ul
