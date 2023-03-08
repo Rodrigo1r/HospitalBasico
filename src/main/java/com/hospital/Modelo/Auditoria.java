@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class Auditoria {
 
+    @Column(name = "fechaCreacion", nullable = false, updatable = false)
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime fechaCreacion;
@@ -26,6 +27,7 @@ public class Auditoria {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime fechaModificacion;
 
+    @Column(name = "creadoPor", nullable = false, updatable = false)
     @CreatedBy
     private String creadoPor;
 

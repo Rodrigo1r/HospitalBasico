@@ -2,6 +2,7 @@ package com.hospital.Servicio;
 
 import com.hospital.Genericos.ICitasMedicas;
 import com.hospital.Modelo.AtencionMedica;
+import com.hospital.Modelo.HistoriaClinica;
 import com.hospital.Repositorio.AtencionMedicaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,4 +69,12 @@ public class AtencionMedicaServicio {
     public AtencionMedica buscaAtencionPorIdCIta(Long idCIta){
         return atencionMedicaRpt.findAtencionMedicaByCitaMedica(idCIta);
     }
+
+    public List<ICitasMedicas> listaHistoriaPorIdPaciente(HistoriaClinica hc) {
+        if (hc != null) {
+            return atencionMedicaRpt.listaHistoriaPorIdPaciente(hc.getId());
+        }
+        return null;
+    }
+
 }

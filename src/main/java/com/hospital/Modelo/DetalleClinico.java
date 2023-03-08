@@ -29,6 +29,5 @@ public class DetalleClinico extends Auditoria {
 
     private Long idAtencion;
 
-    private AtencionMedica atencion;
 
 }

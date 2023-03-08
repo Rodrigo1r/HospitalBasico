@@ -114,8 +114,7 @@ public class AtencionMedicaController {
         
         if(persona.getHistoria() == null){
             detClin.setHistoria(hc);
-            //Esto agregue
-            detClin.setAtencion(atencion);
+
 
             ldc.add(detClin);
             hc.setDetalle(ldc);
@@ -128,8 +127,7 @@ public class AtencionMedicaController {
             hc = persona.getHistoria();
             ldc= persona.getHistoria().getDetalle();
             detClin.setHistoria(persona.getHistoria());
-            //Esto agregue
-            detClin.setAtencion(atencion);
+
 
 
             ldc.add(detClin);
@@ -149,11 +147,11 @@ public class AtencionMedicaController {
     public String historial(@PathVariable long id,Model model, HttpSession session) {
         model.addAttribute("dpersona", session.getAttribute("datoUser"));
 
-        var paciente = personaSvc.buscaPersonaPorId(id);
+        var hClinic = personaSvc.buscaPersonaPorId(id).getHistoria();
 
 
 
-        var lista = paciente.getHistoria().getDetalle();
+        var lista = atencionMedicaSvc.listaHistoriaPorIdPaciente(hClinic);
         model.addAttribute("lista", lista);
         return "atencion/lista-historial-clinico";
     }

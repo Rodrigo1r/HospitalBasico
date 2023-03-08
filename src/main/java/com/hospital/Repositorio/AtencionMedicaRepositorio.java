@@ -43,4 +43,10 @@ public Integer  totalAtencionesAnioAnterior();
             "atencion_medica a where a.id_cita = :citaMedica " , nativeQuery = true)
     public AtencionMedica findAtencionMedicaByCitaMedica(Long citaMedica);
 
+    @Query(value = "SELECT a.fecha_creacion  AS fecha_dia, a.motivo_consulta AS motivo , a.sintomas , a.tratamiento ," +
+            "c.descripcion_especialidad as nombre_especialidad, b.nombre_medico FROM "+
+            "atencion_medica a  , cita_medica b , especialidad C , detalle_clinico d  WHERE a.id_cita = b.id "+
+            "AND b.id_especialidad = c.id AND d.id_atencion = a.id AND  d.id_historia = :id ORDER BY fecha_dia DESC " , nativeQuery = true)
+    public List<ICitasMedicas> listaHistoriaPorIdPaciente(Long id);
+
 }
