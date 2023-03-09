@@ -49,6 +49,8 @@ public class ExamenController {
 
         //Primero valido que la especialidad no exista, porque debe ser uncica
 
+        var cita = citaMedicaSvc.buscarCitaMedicaPorId(id);
+        examen.setAtencion(cita.getAtencionMedica());
             examenSvc.insertar(examen);
             return "redirect:/atencion/listarAtendidos";
     }
