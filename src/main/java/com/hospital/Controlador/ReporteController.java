@@ -79,7 +79,7 @@ public class ReporteController {
 
         List<ICitasMedicas> citas = citaMedicaSvc.listadoCitasPorAtencion(true);
 
-        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,1);
+        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,1 , "Lista de citas Atendidas");
         exporter.exportar(response);
 
 
@@ -100,7 +100,7 @@ public class ReporteController {
 
         List<ICitasMedicas> citas = citaMedicaSvc.listadoCitasAtendidasPorEspecialidad();
 
-        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,2);
+        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,2 , "Lista de citas Atendidas - Por Especialidad");
         exporter.exportar(response);
 
 
@@ -120,7 +120,7 @@ public class ReporteController {
 
         List<ICitasMedicas> citas = citaMedicaSvc.listadoCitasAtendidasPorMedico();
 
-        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,3);
+        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,3 , "Lista de citas Atendidas - Por Médico");
         exporter.exportar(response);
 
 
@@ -139,7 +139,7 @@ public class ReporteController {
 
         List<ICitasMedicas> citas = citaMedicaSvc.listadoCitasAtendidasPorMes();
 
-        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,4);
+        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,4 , "Lista de citas Atendidas - Por Mes");
         exporter.exportar(response);
 
 
@@ -270,7 +270,7 @@ public class ReporteController {
 
         List<ICitasMedicas> citas = citaMedicaSvc.listadoCitasAgendadas();
 
-        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,1);
+        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,1 , "Lista de citas Agendadas");
         exporter.exportar(response);
 
 
@@ -291,7 +291,7 @@ public class ReporteController {
 
         List<ICitasMedicas> citas = citaMedicaSvc.listadoCitasAgendadasPorEspecialidad();
 
-        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,2);
+        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,2 ,  "Lista de citas Agendadas - Por Especialidad");
         exporter.exportar(response);
 
 
@@ -311,7 +311,7 @@ public class ReporteController {
 
         List<ICitasMedicas> citas = citaMedicaSvc.listadoCitasAgendadasPorMedico();
 
-        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,3);
+        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,3 , "Lista de citas Agendadas - Por Médico");
         exporter.exportar(response);
 
 
@@ -330,7 +330,7 @@ public class ReporteController {
 
         List<ICitasMedicas> citas = citaMedicaSvc.listadoCitasAgendadasPorMes();
 
-        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,4);
+        CitaAtendidasExportarPDF exporter = new CitaAtendidasExportarPDF(citas,4 , "Lista de citas Agendadas - Por Mes");
         exporter.exportar(response);
 
 

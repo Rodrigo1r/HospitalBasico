@@ -1,8 +1,17 @@
 package com.hospital.Modelo;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.List;
 
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "atencion_medica")
 public class AtencionMedica extends Auditoria {
@@ -22,58 +31,13 @@ public class AtencionMedica extends Auditoria {
     @JoinColumn(name = "id_cita")
     private CitaMedica citaMedica;
 
-    public AtencionMedica() {
-    }
+    @OneToOne
+    @JoinColumn(name = "id_receta")
+    private Receta receta;
 
-    public AtencionMedica(String motivoConsulta, String sintomas, String tratamiento, CitaMedica citaMedica) {
-        this.motivoConsulta = motivoConsulta;
-        this.sintomas = sintomas;
-        this.tratamiento = tratamiento;
-        this.citaMedica = citaMedica;
-
-    }
+    @OneToMany(mappedBy = "atencion")
+    private List<Examen> examen;
 
 
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getMotivoConsulta() {
-        return motivoConsulta;
-    }
-
-    public String getTratamiento() {
-        return tratamiento;
-    }
-
-    public void setTratamiento(String tratamiento) {
-        this.tratamiento = tratamiento;
-    }
-
-    public void setMotivoConsulta(String motivoConsulta) {
-        this.motivoConsulta = motivoConsulta;
-    }
-
-    public String getSintomas() {
-        return sintomas;
-    }
-
-    public void setSintomas(String sintomas) {
-        this.sintomas = sintomas;
-    }
-
-    public CitaMedica getCitaMedica() {
-        return citaMedica;
-    }
-
-    public void setCitaMedica(CitaMedica citaMedica) {
-        this.citaMedica = citaMedica;
-    }
 
 }

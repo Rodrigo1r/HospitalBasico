@@ -27,10 +27,12 @@ public class CitaAtendidasExportarPDF {
 
 	private List<ICitasMedicas> listaAtendidas;
 	private Integer opcion;
+	private String titulo;
 
-	public CitaAtendidasExportarPDF(List<ICitasMedicas> listaAtendidas, Integer opcion) {
+	public CitaAtendidasExportarPDF(List<ICitasMedicas> listaAtendidas, Integer opcion, String titulo) {
 		this.listaAtendidas = listaAtendidas;
 		this.opcion = opcion;
+		this.titulo = titulo;
 	}
 
 	private void escribirCabeceraPdf(PdfPTable tabla) {
@@ -160,7 +162,8 @@ public class CitaAtendidasExportarPDF {
 		documento.add(image);
 
 
-		Paragraph titulo = null;
+		Paragraph titu = new Paragraph(titulo,fuente);
+		/*
 		switch (opcion){
 			case 1:
 				titulo = new Paragraph("Lista de pacientes Atendidos", fuente);
@@ -179,9 +182,11 @@ public class CitaAtendidasExportarPDF {
 				break;
 
 		}
-		
-		titulo.setAlignment(Paragraph.ALIGN_CENTER);
-		documento.add(titulo);
+
+		 */
+
+		titu.setAlignment(Paragraph.ALIGN_CENTER);
+		documento.add(titu);
 
 		PdfPTable tabla = null;
 		
