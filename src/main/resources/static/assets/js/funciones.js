@@ -100,6 +100,57 @@ function eliminarPersona(id) {
 
 }
 
+function eliminarEnfermedad(id) {
+    console.log(id);
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: 'Está seguro de eliminar esta enfermedad?',
+        text: "Luego de la eliminacion no se podra utilizar !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Eliminar',
+        cancelButtonText: 'No, cancelar',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "/enfermedad/eliminar/" + id,
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+
+            swalWithBootstrapButtons.fire({
+                title: 'Eliminada!',
+                text: 'La enfermedad fue eliminada.',
+                icon: 'success',
+            }).then((ok) => {
+                if (ok) {
+                    location.href = "/enfermedad/listar";
+                }
+
+            });
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelado',
+                'La enfermedad no fue eliminada :)',
+                'error'
+            )
+        }
+    })
+
+}
+
 function mensajeJs() {
     Swal.fire({
         //position: 'top-end',

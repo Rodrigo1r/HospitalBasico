@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+<!-- Contenido Dinamico   -->
+<main id="main" class="main">
+
+    <!-- Titulo de Pagina -->
+    <div class="pagetitle">
+        <h1>Listado de Enfermedades Registradas</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" th:href="@{/home}">Inicio</a></li>
+                <li class="breadcrumb-item">Enfermedades</li>
+
+            </ol>
+        </nav>
+    </div>
+
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+
+                        <h3 th:if="${#lists.isEmpty(lista)}">No tiene registro de enfermedades</h3>
+
+                        <a class="btn btn-primary"
+                           th:href="@{/enfermedad/agregar}">Agregar</a>
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Ced.</th>
+                                <th scope="col">Edad</th>
+
+                                <th scope="col">F.Diagnóstico</th>
+                                <th scope="col">Enfermedad</th>
+                                <th scope="col">F.Registro</th>
+                                <th scope="col">Observaciones</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="enfermedad : ${lista}">
+
+                                <td th:text="${enfermedad.id}">
+                                <td th:text="${enfermedad.persona.nombres}">
+                                <td th:text="${enfermedad.persona.apellidos}">
+                                <td th:text="${enfermedad.persona.identificacion}">
+                                <td th:text="${enfermedad.persona.edad()}">
+                                <td th:text="${enfermedad.fechaDiagnostico}">
+                                <td th:text="${enfermedad.nombreEnfermedad}">
+
+                                <td th:text="${#temporals.format(enfermedad.fechaCreacion,'yyyy-MM-dd')}">
+                                <td th:text="${enfermedad.observaciones}">
+
+                                <td><a class="btn btn-info"
+                                       th:href="@{/enfermedad/editar/{id}(id=${enfermedad.id})}">Editar</a></td>
+                                <td><a class="btn btn-danger"
+                                       th:onclick="eliminarEnfermedad('[[${enfermedad.id}]]')"
+                                > Eliminar </a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+</html>

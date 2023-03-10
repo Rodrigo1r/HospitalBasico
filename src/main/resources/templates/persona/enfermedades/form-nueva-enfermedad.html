@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+	<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+	<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+	<!-- Contenido Dinamico   -->
+	<!-- Inicio del #main -->
+	<main id="main" class="main">
+		<!-- Titulo de Pagina -->
+		<div class="pagetitle">
+			<h1>
+				<a>Registro de Atenciones Médicas</a>
+			</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html"
+						th:href="@{/home}">Inicio</a></li>
+					<li class="breadcrumb-item">Tabla</li>
+					<li class="breadcrumb-item active">Datos</li>
+				</ol>
+			</nav>
+		</div>
+
+
+
+
+
+		<div class="container">
+			<section>
+				<div class="container">
+					<div class="card" th:if="${paciente != null}">
+						<div class="card-body">
+
+							<h5>
+								<strong>Datos del paciente</strong>
+							</h5>
+
+							<form class="form-inline needs-validation" novalidate action="#"
+								th:object="${paciente}">
+
+								<div class="row">
+
+									<div class="col-1" hidden>
+										<label for="id_paciente" class="form-label">Cod.</label> <input
+											style="background: #e6e6e6" type="text" name="id_paciente"
+											class="form-control" id="id_paciente" readonly
+											th:field="*{id}">
+									</div>
+
+									<div class="col-3">
+										<label for="identificacion" class="form-label">Identificacion</label>
+										<input style="background: #e6e6e6" type="text"
+											name="identificacion" class="form-control"
+											id="identificacion" readonly th:field="*{identificacion}">
+									</div>
+
+
+									<div class="col-3">
+										<label for="nombres" class="form-label">Nombres</label> <input
+											style="background: #e6e6e6" type="text" name="nombres"
+											class="form-control" id="nombres" readonly
+											th:field="*{nombres}">
+									</div>
+
+									<div class="col-3">
+										<label for="apellidos" class="form-label">Apellidos</label> <input
+											style="background: #e6e6e6" type="text" name="apellidos"
+											class="form-control" id="apellidos" readonly
+											th:field="*{apellidos}">
+									</div>
+
+									<div class="col-3">
+										<label for="telefono" class="form-label">Telefono</label> <input
+											style="background: #e6e6e6" type="text" name="telefono"
+											class="form-control" id="telefono" readonly
+											th:field="*{telefono}">
+									</div>
+									<p>
+									<div class="col-4">
+										<label for="correo" class="form-label">Correo</label> <input
+											style="background: #e6e6e6" type="text" name="correo"
+											class="form-control" id="correo" readonly
+											th:field="*{correo}">
+									</div>
+
+									<div class="col-2">
+										<label for="genero" class="form-label">Genero</label> <input
+											style="background: #e6e6e6" type="text" name="genero"
+											class="form-control" id="genero" readonly
+											th:field="*{genero}">
+									</div>
+
+									<div class="col-2">
+										<label for="lugar_residencia" class="form-label">Lugar
+											residencia</label> <input style="background: #e6e6e6" type="text"
+											name="lugar_residencia" class="form-control"
+											id="lugar_residencia" readonly th:field="*{lugar_residencia}">
+									</div>
+
+									<div class="col-2">
+										<label for="fecha_nacimiento" class="form-label">Fecha
+											Nacimiento</label> <input style="background: #e6e6e6" type="text"
+											name="fecha_nacimiento" class="form-control"
+											id="fecha_nacimiento" readonly th:field="*{fecha_nacimiento}">
+									</div>
+									<div class="col-2">
+										<label for="edad_paciente" class="form-label">Edad</label> <input
+											style="background: #e6e6e6" type="text" name="edad_paciente"
+											class="form-control" id="edad_paciente" readonly>
+									</div>
+
+
+								</div>
+
+							</form>
+
+
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+
+
+		<section class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+
+
+						<div class="card" th:if="${paciente != null}">
+
+							<div class="card-body">
+								<h3 class="card-title text-center">
+									<a>Datos de la cita </a>
+								</h3>
+
+								<form class="row g-3 needs-validation" novalidate method="post"
+									action="#" th:action="@{/enfermedad/agregar}" th:object="${enfermedad}">
+
+
+
+									<div class="col-3">
+										<label class="form-label" for="fechaDiagnostico">Fecha de Diagnostico</label> <input
+											type="date" class="form-control" id="fechaDiagnostico"
+											placeholder="Fecha de  Diagnostico"
+											th:field="*{fechaDiagnostico}" required />
+										<div class="invalid-feedback">Por favor Seleccione
+											fecha de Diagnóstico</div>
+									</div>
+
+									<div class="col-4">
+										<label for="nombreEnfermedad" class="form-label">Nombre Enfermedad</label> <input
+											type="text" name="nombreEnfermedad" class="form-control" id="nombreEnfermedad"
+											required th:field="*{nombreEnfermedad}">
+										<div class="invalid-feedback">Por favor, ingrese
+											nombre de enfermedad!</div>
+									</div>
+
+									<div class="col-8">
+										<label for="posibleObervacion" class="form-label">Posible Obervación del cliente</label>
+										<textarea
+												name="posibleObervacion" class="form-control"
+												id="posibleObervacion" required th:field="*{posibleObervacion}" rows="2"></textarea>
+										<div class="invalid-feedback">Por favor, ingrese una observación
+										</div>
+									</div>
+
+									<div class="col-8">
+										<label for="observaciones" class="form-label">Observaciones</label>
+										<textarea
+												name="observaciones" class="form-control"
+												id="observaciones" required th:field="*{observaciones}" rows="2"></textarea>
+										<div class="invalid-feedback">Por favor, ingrese una observacón
+										</div>
+									</div>
+
+
+
+
+
+									<div class="text-center">
+										<!--	<button class="btn btn-primary" th:onclick="guardarCitaPaciente()">Guardar -->
+										<button class="btn btn-primary" type="submit">Guardar
+										</button>
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+		
+	</main>
+	<!-- End #main -->
+
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+<script th:replace="cita/js/autocompletar-persona ::buscarPersona"></script>
+
+<script>
+	calcularEdad();
+	buscaDiasEspecialidad();
+	buscaMedicosDiasEspecialidad();
+	buscaHorariosEspecialidadDiaMedico();
+	obtenerIdPaciente();
+	enableSearchField(searchType);
+</script>
+</html>

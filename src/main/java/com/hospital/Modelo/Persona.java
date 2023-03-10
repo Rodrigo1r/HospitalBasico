@@ -2,6 +2,8 @@ package com.hospital.Modelo;
 
 import java.io.Serializable;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 import java.util.List;
 
@@ -84,5 +86,18 @@ public class Persona extends Auditoria implements Serializable {
      @JoinColumn(name = "id_historia")
      private HistoriaClinica historia;
 
+    @OneToMany(mappedBy = "persona")
+    private List<Enfermedad> enfermedad;
 
+
+
+    public Integer edad() {
+        LocalDate fecha = convertToLocalDateViaSqlDate(this.fecha_nacimiento);
+        Period edad = Period.between(LocalDate.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth()), LocalDate.now());
+        return edad.getYears();
+    }
+
+    public LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
+        return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
+    }
 }
