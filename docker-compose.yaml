@@ -1,0 +1,40 @@
+services:
+
+  #Servicio para la aplicacion Java
+  java_app:
+    container_name: hospitalBasico
+    build:  .
+    ports:
+      - 3000:3000
+    networks:
+      - red_interna
+    environment:
+      - DATABASE_URL=jdbc:postgresql://hospital_db:5432/hospital
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=administrador
+    depends_on:
+      - hospital_db
+    restart:  always
+  #Servicio para la base de datos de postgreSql
+  hospital_db:
+    container_name: postgres_db
+    image:  postgres:15.7
+    ports:
+      - 5432:5432
+    networks:
+      - red_interna
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=administrador
+      - POSTGRES_DB=hospital
+    volumes:
+      - data_postgres:var/lib/postgresql/data
+    restart:  always
+#Declaracion de la red que vamos a utilizar para comunicar la app con la base de datos
+networks:
+  red_interna:
+
+#Declaracion del volumen que vamos a utilizar para postgres
+volumes:
+  data_postgres:
+    
