@@ -100,6 +100,57 @@ function eliminarPersona(id) {
 
 }
 
+function eliminarEnfermedad(id) {
+    console.log(id);
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: 'Está seguro de eliminar esta enfermedad?',
+        text: "Luego de la eliminacion no se podra utilizar !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Eliminar',
+        cancelButtonText: 'No, cancelar',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "/enfermedad/eliminar/" + id,
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+
+            swalWithBootstrapButtons.fire({
+                title: 'Eliminada!',
+                text: 'La enfermedad fue eliminada.',
+                icon: 'success',
+            }).then((ok) => {
+                if (ok) {
+                    location.href = "/enfermedad/listar";
+                }
+
+            });
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelado',
+                'La enfermedad no fue eliminada :)',
+                'error'
+            )
+        }
+    })
+
+}
+
 function mensajeJs() {
     Swal.fire({
         //position: 'top-end',
@@ -574,4 +625,37 @@ function desactivarHorario(id){
         }
     })
 
+}
+
+function enableSearchField(searchType) {
+									document.getElementById('btnBuscar')
+										.removeAttribute('disabled');
+	
+							if (searchType === 'buscarCedulaRadio') {
+								document.getElementById('buscarPorCedula')
+										.removeAttribute('hidden');
+								document.getElementById('buscarPorCedula')
+										.setAttribute('required', 'true');
+								document.getElementById('buscarPorNombre')
+										.setAttribute('hidden', 'true');
+								document.getElementById('buscarPorNombre')
+										.removeAttribute('required');
+										
+										
+								document.querySelector('#labelBusqueda').innerText = 'Cédula';
+								document.querySelector('#invalidBuscar').innerText = 'Por favor ingrese cédula a buscar';
+
+							} else {
+								document.getElementById('buscarPorNombre')
+										.removeAttribute('hidden');
+								document.getElementById('buscarPorNombre')
+										.setAttribute('required', 'true');
+								document.getElementById('buscarPorCedula')
+										.setAttribute('hidden', 'true');
+								document.getElementById('buscarPorCedula')
+										.removeAttribute('required');
+								document.querySelector('#labelBusqueda').innerText = 'Nombres';
+								document.querySelector('#invalidBuscar').innerText = 'Por favor ingrese nombres a buscar';
+
+							}
 }

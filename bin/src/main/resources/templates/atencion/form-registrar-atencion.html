@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+	<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+	<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+	<!-- Contenido Dinamico   -->
+	<!-- Inicio del #main -->
+	<main id="main" class="main">
+		<!-- Titulo de Pagina -->
+		<div class="pagetitle">
+			<h1 > <a >Registro de Atenciones Médicas</a></h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html"
+						th:href="@{/home}">Inicio</a></li>
+					<li class="breadcrumb-item">Tabla</li>
+					<li class="breadcrumb-item active">Datos</li>
+				</ol>
+			</nav>
+		</div>
+
+		<!-- End Page Title -->
+
+		<div class="container">
+			<section>
+				<div class="container">
+					<div class="card" th:if="${paciente != null}">
+						<div class="card-body">
+
+
+
+							<div class="magen-top-mas-extremo">
+								<h5 class="text-center"><strong>Datos del paciente</strong></h5>
+								<a class="btn btn-success" type="submit" th:href="@{/atencion/historia/{id}(id=${id})}">Historia clínica</a>
+							</div>
+
+
+							<form class="form-inline needs-validation" novalidate
+								  action="#" th:object="${paciente}">
+
+								<div class="row">
+
+									<div class="col-1" hidden>
+										<label for="id_paciente" class="form-label">Cod.</label>
+										<input style="background:#e6e6e6" type="text" name="id_paciente"
+											   class="form-control"
+											   id="id_paciente" readonly th:field="*{id}">
+									</div>
+
+									<div class="col-3">
+										<label for="identificacion" class="form-label">Identificacion</label>
+										<input style="background:#e6e6e6" type="text" name="identificacion"
+											   class="form-control"
+											   id="identificacion" readonly th:field="*{identificacion}">
+									</div>
+
+
+									<div class="col-3">
+										<label for="nombres" class="form-label">Nombres</label>
+										<input style="background:#e6e6e6" type="text" name="nombres" class="form-control"
+											   id="nombres" readonly th:field="*{nombres}">
+									</div>
+
+									<div class="col-3">
+										<label for="apellidos" class="form-label">Apellidos</label>
+										<input style="background:#e6e6e6" type="text" name="apellidos" class="form-control"
+											   id="apellidos" readonly th:field="*{apellidos}">
+									</div>
+
+									<div class="col-3">
+										<label for="telefono" class="form-label">Telefono</label>
+										<input style="background:#e6e6e6" type="text" name="telefono" class="form-control"
+											   id="telefono" readonly th:field="*{telefono}">
+									</div>
+									<p>
+									<div class="col-4">
+										<label for="correo" class="form-label">Correo</label>
+										<input style="background:#e6e6e6" type="text" name="correo" class="form-control"
+											   id="correo" readonly th:field="*{correo}">
+									</div>
+
+									<div class="col-2">
+										<label for="genero" class="form-label">Genero</label>
+										<input style="background:#e6e6e6" type="text" name="genero" class="form-control"
+											   id="genero" readonly th:field="*{genero}">
+									</div>
+
+									<div class="col-2">
+										<label for="lugar_residencia" class="form-label">Lugar residencia</label>
+										<input style="background:#e6e6e6" type="text" name="lugar_residencia"
+											   class="form-control"
+											   id="lugar_residencia" readonly th:field="*{lugar_residencia}">
+									</div>
+
+									<div class="col-2">
+										<label for="fecha_nacimiento" class="form-label">Fecha Nacimiento</label>
+										<input style="background:#e6e6e6" type="text" name="fecha_nacimiento"
+											   class="form-control"
+											   id="fecha_nacimiento" readonly th:field="*{fecha_nacimiento}">
+									</div>
+									<div class="col-2">
+										<label for="edad_paciente" class="form-label">Edad</label>
+										<input style="background:#e6e6e6" type="text" name="edad_paciente"
+											   class="form-control"
+											   id="edad_paciente" readonly>
+									</div>
+
+
+								</div>
+
+							</form>
+
+
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+
+
+		<section class="section">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+
+							<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${pExiste != null}"><a th:text="${pExiste}"> </a>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+							<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${pIdentif != null}"><a th:text="${pIdentif}"> </a>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+
+
+							<div class="card">
+
+								<div class="card-body">
+									<h3 class="card-title text-center" ><a >Datos de la consulta </a></h3>
+
+									<form class="row g-3 needs-validation" novalidate method="post"
+										action="#" th:action="@{/atencion/registrar/{id}(id=${id})}"
+										th:object="${atencion}">
+
+
+										<input type="hidden" for="id" th:field="*{id}"></input>
+
+										<div class="col-4 form-group">
+											<label >Motivo Consulta</label>
+											<select  name="motivoConsulta" th:field="*{motivoConsulta}" required class="form-control">
+												<option selected value="">Seleccione.....</option>
+												<option
+														th:each="motivo : ${motivos}" th:value="${motivo}"
+														th:text="${motivo}" ></option>
+
+											</select>
+											<div class="invalid-feedback">Por favor seleccione
+												motivo!</div>
+										</div>
+
+
+										<div class="col-10">
+											<label for="sintomas" class="form-label">Sintomas</label>
+											<textarea
+													name="sintomas" class="form-control"
+													id="sintomas" required th:field="*{sintomas}" rows="2"></textarea>
+											<div class="invalid-feedback">Por favor, ingrese sintomas del paciente
+											</div>
+										</div>
+
+										<div class="col-10">
+											<label for="tratamiento" class="form-label">Tratamiento</label>
+											<textarea
+													name="tratamiento" class="form-control"
+													id="tratamiento" required th:field="*{tratamiento}" rows="2"></textarea>
+											<div class="invalid-feedback">Por favor, ingrese tratamiento sugerido
+											</div>
+										</div>
+
+
+
+										<div class="text-center">
+											<button class="btn btn-primary" type="submit">Registrar atencion</button>
+										</div>
+									</form>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+
+			</section>
+
+		</div>
+	</main>
+	<!-- End #main -->
+
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+<script>
+	calcularEdad();
+
+</script>
+</html>

@@ -701,7 +701,7 @@ h6 {
     font-size: 15px;
     font-weight: 600;
     color: #4154f1;
-    transition: 0.3;
+    transition: 0.3s;
     background: #f6f9ff;
     padding: 10px 15px;
     border-radius: 4px;
@@ -752,7 +752,7 @@ h6 {
     font-size: 14px;
     font-weight: 600;
     color: #012970;
-    transition: 0.3;
+    /*transition: 0.3s;*/
     padding: 10px 0 10px 40px;
     transition: 0.3s;
 }
@@ -1275,4 +1275,62 @@ h6 {
 .two-fields button {
     width: 100%;
     height: 100%;
+}
+
+/*--------------------------------------------------------------
+# Coloca botones en la misma linea pero en los extremos
+adicional configura un especio entre la pantalla y los controles
+--------------------------------------------------------------*/
+.magen-top-mas-extremo{
+    text-decoration: none;
+    color: #374457;
+    font-size: 18px;
+    font-weight: bold;
+    display:flex;
+    align-items:center;
+    margin: 10px;
+    justify-content: space-between;
+}
+.magen-top-misma-linea{
+    text-decoration: none;
+    color: #374457;
+    font-size: 18px;
+    font-weight: bold;
+    display:flex;
+    align-items:center;
+    margin: 10px;
+}
+
+.controles-misma-linea{
+
+    display: inline-block;
+
+}
+
+.contenedor{
+    display: inline;
+    align-items:center;
+    margin-top: 10px;
+    
+    
+}
+.contenedor button{
+    color: white;
+    font-weight: bold;
+    margin:10px;
+    
+
+}
+.contenedor label{
+    display: inline;
+
+}
+.contenedor input{
+    display: inline;
+    margin: 10px;
+    width: 260px;
+}
+.contenedor .divi{
+    display: block;
+
 }

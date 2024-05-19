@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<script type="text/javascript" th:fragment="buscarPersona">
+		$(document).ready(function() {
+
+			$("#buscarPorNombre").autocomplete({
+
+				source : function(request, response) {
+					$.ajax({
+						url : "/persona/cargarPersonas/" + request.term,
+						dataType : "json",
+						data : {
+							term : request.term
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									value : item.id,
+									label : item.apellidos + ' ' + item.nombres,
+									cedula : item.identificacion,
+								};
+							}));
+						},
+					});
+				},
+				select : function(event, ui) {
+					$("#buscarPorNombre").val(ui.item.cedula);
+					$("#buscarPorCedula").val(ui.item.cedula);
+					
+
+
+					return false;
+				}
+			});
+		});
+	</script>
+</body>
+</html>

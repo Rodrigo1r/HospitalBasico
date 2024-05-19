@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/plantilla ::head"> </head>
+
+<body>
+
+  <main>
+    <div class="container">
+
+      <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+        <h1>404</h1>
+        <h2>Lo sentimos, el recurso que esta buscando no existe.</h2>
+
+        <img th:src="@{/assets/img/not-found.svg}" class="img-fluid py-5" alt="Pagina no encontrada">
+        <a class="btn" href="index.html" th:href="@{/home}">Regresar el inicio</a>
+
+      </section>
+
+    </div>
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<footer th:replace="plantilla/plantilla ::footer"></footer>
+
+</body>
+
+</html>

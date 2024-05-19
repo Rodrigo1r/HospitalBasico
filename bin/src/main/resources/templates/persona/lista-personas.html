@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+<!-- Contenido Dinamico   -->
+<main id="main" class="main">
+
+    <!-- Titulo de Pagina -->
+    <div class="pagetitle">
+        <h1>Listado de Usuarios</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" th:href="@{/home}">Inicio</a></li>
+                <li class="breadcrumb-item">Tabla</li>
+                <li class="breadcrumb-item active">Datos</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+
+                        <h2 th:if="${#lists.isEmpty(lista)}">No hay personas Registrados</h2>
+
+                        <a class="btn btn-primary"
+                           th:href="@{/persona/agregar}">Agregar nuevo usuario</a>
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+
+                                <th scope="col">Ced.</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Ciudad</th>
+
+                                <th scope="col">Roles</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="persona : ${lista}">
+
+                                <td th:text="${persona.identificacion}">
+                                <td th:text="${persona.nombres}">
+                                <td th:text="${persona.apellidos}">
+                                <td th:text="${persona.telefono}">
+                                <td th:text="${persona.lugar_residencia}">
+
+                                <td th:text="${persona.roles}">
+
+                                <td><a class="btn btn-info"
+                                       th:href="@{/persona/editar/{id}(id=${persona.id})}">Editar</a></td>
+                                <td><a class="btn btn-danger" sec:authorize="hasAuthority('ADMINISTRADOR')"
+                                       th:if="${persona.roles} != '[ADMINISTRADOR]'"
+                                       th:onclick="eliminarPersona('[[${persona.id}]]')"
+                                > Eliminar </a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+</html>

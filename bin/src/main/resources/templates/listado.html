@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Hospital Basico el Oro</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css">
+</head>
+<body>
+	<div class="col-sm-3 col-md-3 sidebar">
+		<br>
+		<h2 th:if="${#lists.isEmpty(lista)}">No hay personas</h2>
+		<div th:if="${not #lists.isEmpty(lista)}">
+
+			<h2>Mantenimiento de Pacientes</h2>
+
+			<br>
+			<table class="table table-striped" border="1">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Identificacion</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Apellido</th>
+						<th scope="col">Teléfono</th>
+						<th scope="col">Lugar Residencia</th>
+						<th scope="col">Correo</th>
+						<th scope="col">Editar</th>
+						<th scope="col">Eliminar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="paciente : ${lista}">
+						<td th:text="${paciente.identificacion}">
+						<td th:text="${paciente.nombres}">
+						<td th:text="${paciente.apellidos}">
+						<td th:text="${paciente.telefono}">
+						<td th:text="${paciente.lugar_residencia}">
+						<td th:text="${paciente.correo}">
+						<td><a class="btn btn-info"
+							th:href="@{/save/{id}(id=${paciente.id})}">Editar</a></td>
+						<td><a class="btn btn-danger"
+							th:href="@{/delete/{id}(id=${paciente.id})}">Eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<div class="pull-right">
+			<a href="form-paciente.html" th:href="@{/nuevo}"
+				class="btn btn-primary">Agregar</a>
+		</div>
+	</div>
+</body>
+</html>

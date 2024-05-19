@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+<!-- Contenido Dinamico   -->
+<main id="main" class="main">
+
+    <!-- Titulo de Pagina -->
+    <div class="pagetitle">
+        <h1>Planificacion de Horarios</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" th:href="@{/home}">Inicio</a></li>
+                <li class="breadcrumb-item">Tabla</li>
+                <li class="breadcrumb-item active">Datos</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 th:if="${#lists.isEmpty(listaHorarios)}">No se ha realizado planificación de Horarios</h4>
+
+                        <br>
+                        <a class="btn btn-primary"
+                            th:href="@{/horario/planificarHorarios}">Planificar
+                            Horarios</a>
+
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+
+
+                            <thead>
+                            <tr>
+
+
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombres</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Horario</th>
+                                <th scope="col">Activo</th>
+                                <th scope="col">Asignado</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="horario , iStat: ${listaHorarios}">
+
+                                <td th:text="${horario.id}">
+                                <td th:text="${horario.nombres  + ' ' + horario.apellidos}">
+
+                                <td th:text="${horario.fecha_dia}">
+                                <td th:text="${horario.horario}">
+                                <td th:text="${horario.activo} ? 'Activo' : 'No Activo'">
+                                <td th:text="${horario.asignado} ? 'Asignado' : 'Libre'">
+
+
+                                    <!--        <td><a class="btn btn-info"
+                                                   th:href="@{/horario/editar/{id}(id=${horario.id})}">Editar</a></td>
+                                        -->
+                                <td><a class="btn btn-danger" id="alert_demo_4"
+                                       sec:authorize="hasAuthority('ADMINISTRADOR')"
+                                       th:onclick="desactivarHorario('[[${horario.id}]]')"
+                                >Desactivar</a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+</html>

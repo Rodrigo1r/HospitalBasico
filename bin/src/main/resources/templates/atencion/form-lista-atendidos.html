@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="plantilla/plantilla-menu :: head"></head>
+<body>
+<header th:replace="plantilla/plantilla-menu :: header"></header>
+
+<aside th:replace="plantilla/plantilla-menu :: sidebarDashboard"></aside>
+
+
+<!-- Contenido Dinamico   -->
+<main id="main" class="main">
+
+    <!-- Titulo de Pagina -->
+    <div class="pagetitle">
+        <h1>Listado de pacientes Atendidos</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" th:href="@{/home}">Inicio</a></li>
+                <li class="breadcrumb-item">Tabla</li>
+                <li class="breadcrumb-item active">Datos</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+
+
+                        <h4 th:if="${#lists.isEmpty(lista)}">No tiene citas atendidas</h4>
+
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+
+
+                                <th scope="col">Feha</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Medico</th>
+                                <th scope="col">Especialidad</th>
+
+                                <th scope="col">Horario</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="cita : ${lista}">
+
+
+                                <td th:text="${cita.fecha_dia}">
+                                <td th:text="${cita.nombres}">
+                                <td th:text="${cita.apellidos}">
+                                <td th:text="${cita.nombre_medico}">
+                                <td th:text="${cita.nombre_especialidad}">
+
+                                <td th:text="${cita.horario}">
+                                
+
+                                <td><a class="btn btn-success" id="alert_demo_4"
+                                       sec:authorize="hasAuthority('MEDICO')"
+                                       th:href="@{/examen/registrar/{id}(id=${cita.id_cita})}"
+                                >Ordenar</a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+</body>
+
+<footer th:replace="plantilla/plantilla-menu ::footer"></footer>
+
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>Hospital Básico</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
+
+<!-- Favicons -->
+<link th:href="@{/assets/img/favicon.png}" rel="icon">
+<link th:href="@{/assets/img/apple-touch-icon.png}"
+	rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link th:href="@{/assets/css/css.css}" rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/vendor/boxicons/css/boxicons.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/vendor/quill/quill.snow.css}" rel="stylesheet">
+<link th:href="@{/assets/vendor/quill/quill.bubble.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/vendor/remixicon/remixicon.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/vendor/simple-datatables/style.css}"
+	rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link th:href="@{/assets/css/style.css}" rel="stylesheet">
+<link th:href="@{/assets/css/jquery-ui.min.css}" rel="stylesheet">
+
+
+
+</head>
+
+<body th:fragment="body">
+
+	<!-- ======= Header ======= -->
+
+	<!-- ======= Header ======= -->
+	<header id="header" class="header fixed-top d-flex align-items-center"
+		th:fragment="header">
+
+		<div class="d-flex align-items-center justify-content-between">
+			<a href="index.html" th:href="@{/home}"
+				class="logo d-flex align-items-center"> <img
+				th:src="@{/assets/img/logo.png}" alt=""> <span
+				class="d-none d-lg-block">Hospital Básico</span>
+			</a> <i class="bi bi-list toggle-sidebar-btn"></i>
+		</div>
+		<!-- End Logo  Este codigo se puede descomentar para implemantar alguna busqueda
+
+		<div class="search-bar">
+			<form class="search-form d-flex align-items-center" method="POST"
+				action="#">
+				<input type="text" name="query" placeholder="Search"
+					title="Enter search keyword">
+				<button type="submit" title="Search">
+					<i class="bi bi-search"></i>
+				</button>
+			</form>
+		</div>
+
+		End Search Bar -->
+
+		<nav class="header-nav ms-auto">
+			<ul class="d-flex align-items-center">
+
+				<li class="nav-item d-block d-lg-none"><a
+					class="nav-link nav-icon search-bar-toggle " href="#"> <i
+						class="bi bi-search"></i>
+				</a></li>
+				<!-- End Search Icon-->
+
+				<li class="nav-item dropdown"><a class="nav-link nav-icon"
+					href="#" data-bs-toggle="dropdown"> <i class="bi bi-bell"></i>
+						<span class="badge bg-primary badge-number">4</span>
+				</a> <!-- End Notification Icon -->
+
+					<ul
+						class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+						<li class="dropdown-header">Tienes 4 notificaciones nuevas <a
+							href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todo</span></a>
+						</li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+
+						<li class="notification-item"><i
+							class="bi bi-exclamation-circle text-warning"></i>
+							<div>
+								<h4>Lorem Ipsum</h4>
+								<p>Quae dolorem earum veritatis oditseno</p>
+								<p>30 min. ago</p>
+							</div></li>
+
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+
+						<li class="notification-item"><i
+							class="bi bi-x-circle text-danger"></i>
+							<div>
+								<h4>Atque rerum nesciunt</h4>
+								<p>Quae dolorem earum veritatis oditseno</p>
+								<p>1 hr. ago</p>
+							</div></li>
+
+
+					</ul> <!-- End Notification Dropdown Items --></li>
+				<!-- End Notification Nav -->
+
+				<li class="nav-item dropdown"><a class="nav-link nav-icon"
+					href="#" data-bs-toggle="dropdown"> <i
+						class="bi bi-chat-left-text"></i> <span
+						class="badge bg-success badge-number">3</span>
+				</a> <!-- End Messages Icon -->
+
+					<ul
+						class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+						<li class="dropdown-header">Tienes 3 nuevos mensajes <a
+							href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todo</span></a>
+						</li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+
+						<li class="message-item"><a href="#"> <img
+								th:src="@{/assets/img/messages-1.jpg}" alt=""
+								class="rounded-circle">
+						</a>
+							<div>
+								<h4>Maria Hudson</h4>
+								<p>Velit asperiores et ducimus soluta repudiandae labore
+									officia est ut...</p>
+								<p>4 hrs. ago</p>
+							</div></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+
+
+					</ul> <!-- End Messages Dropdown Items --></li>
+				<!-- End Messages Nav -->
+
+				<li class="nav-item dropdown pe-3" sec:authorize="isAuthenticated()"><a
+					class="nav-link nav-profile d-flex align-items-center pe-0"
+					href="#" data-bs-toggle="dropdown"> <img
+						th:src="@{/assets/img/profile-img.jpg}" alt="Profile"
+						class="rounded-circle"> <span
+						class="d-none d-md-block dropdown-toggle ps-2"
+						 th:text="${dpersona.nombres}">usuario</span>
+				</a> <!-- End Profile Iamge Icon -->
+
+					<ul
+						class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+						<li class="dropdown-header" sec:authorize="isAuthenticated()">
+							<h6 th:text="${dpersona.nombres + ' ' +  dpersona.apellidos}">Nombre
+								Usuario</h6> <span th:text="${dpersona.usuario}">usuario</span> <br>
+							<span th:text="${dpersona.roles}">Cargo Usuario</span>
+						</li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+
+						<li><a class="dropdown-item d-flex align-items-center"
+							   th:href="@{/persona/perfil}"> <i class="bi bi-person"></i> <span th:action="@{/persona/perfil}">Mi
+									Perfil</span>
+						</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+
+						<li><a class="dropdown-item d-flex align-items-center"
+							   th:href="@{/persona/perfil}"> <i class="bi bi-gear"></i> <span th:action="@{/persona/perfil}">Configurar
+									Cuenta</span>
+						</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li><a class="dropdown-item d-flex align-items-center"
+							href="#" th:href="@{/logout}"> <i
+								class="bi bi-box-arrow-right"></i> <span th:action="@{/logout}">Cerrar
+									sesion</span>
+						</a></li>
+
+					</ul> <!-- End Profile Dropdown Items --></li>
+				<!-- End Profile Nav -->
+
+			</ul>
+		</nav>
+		<!-- End Icons Navigation -->
+
+	</header>
+	<!-- End Header -->
+
+	<!-- End Header -->
+
+
+	<!-- ======= Sidebar ======= -->
+	<aside id="sidebar" class="sidebar" th:fragment="sidebarDashboard">
+
+		<ul class="sidebar-nav" id="sidebar-nav">
+
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="index.html" th:href="@{/home}"> <i class="bi bi-grid"></i>
+					<span>Inicio</span>
+			</a></li>
+			<!-- End Dashboard Nav -->
+
+			<li class="nav-item"
+				sec:authorize="hasAnyAuthority('ADMINISTRADOR' , 'SECRETARIA')"
+				th:fragment="navUsuarios"><a class="nav-link collapsed"
+				data-bs-target="#users-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-people"></i><span>Usuarios</span><i
+					class="bi bi-chevron-down ms-auto"></i>
+			</a>
+				<ul id="users-nav" class="nav-content collapse "
+					data-bs-parent="#sidebar-nav">
+
+					<li><a href="lista-personas.html" th:href="@{/persona/listar}">
+							<i class="bi bi-circle"></i><span>Gestionar</span>
+					</a></li>
+
+				</ul></li>
+			<!-- End Forms Nav -->
+
+			<li class="nav-item" sec:authorize="hasAuthority('ADMINISTRADOR')"
+				th:fragment="navEspecialidades"><a class="nav-link collapsed"
+				data-bs-target="#espec-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-inboxes"></i><span>Especialidades</span><i
+					class="bi bi-chevron-down ms-auto"></i>
+			</a>
+				<ul id="espec-nav" class="nav-content collapse"
+					data-bs-parent="#sidebar-nav">
+
+					<li><a href="form-lista-especialidad"
+						th:href="@{/especialidad/listar}" class="active"> <i
+							class="bi bi-circle"></i><span>Gestionar</span>
+					</a></li>
+
+				</ul></li>
+			<!-- End Tables Nav -->
+
+			<li class="nav-item" sec:authorize="hasAuthority('ADMINISTRADOR')"
+				th:fragment="navMedicos"><a class="nav-link collapsed"
+				data-bs-target="#medic-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-briefcase"></i><span>Médicos</span><i
+					class="bi bi-chevron-down ms-auto"></i>
+			</a>
+				<ul id="medic-nav" class="nav-content collapse"
+					data-bs-parent="#sidebar-nav">
+
+					<li><a href="tables-data.html"
+						th:href="@{/persona/listaMedicos}" class="active"> <i
+							class="bi bi-circle"></i><span>Gestionar</span>
+					</a></li>
+
+					<li><a href="tables-data.html" th:href="@{/horario/listar}"
+						class="active"> <i class="bi bi-circle"></i><span>Horario
+								Trabajo</span>
+					</a></li>
+
+					<li><a href="tables-general.html"
+						th:href="@{/horario/listaHorariosPlanificados}"> <i
+							class="bi bi-circle"></i><span>Planificar Horarios</span>
+					</a></li>
+
+				</ul></li>
+			<!-- End Tables Nav -->
+
+			<li class="nav-item" sec:authorize="hasAuthority('MEDICO')"
+				th:fragment="navAtenciones"><a class="nav-link collapsed"
+				data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-card-list"></i><span>Atenciones</span><i
+					class="bi bi-chevron-down ms-auto"></i>
+			</a>
+				<ul id="icons-nav" class="nav-content collapse "
+					data-bs-parent="#sidebar-nav">
+					<li><a href="icons-bootstrap.html"
+						th:href="@{/atencion/listar}"> <i class="bi bi-circle"></i><span>Consultar</span>
+					</a></li>
+					<li><a href="icons-remix.html"
+						th:href="@{/atencion/listarAtendidos}"> <i
+							class="bi bi-circle"></i><span>Exámenes</span>
+					</a></li>
+					<li><a href="icons-remix.html"
+						   th:href="@{/atencion/listarRecetas}"> <i
+							class="bi bi-circle"></i><span>Recetas</span>
+					</a></li>
+
+				</ul></li>
+			<!-- End Icons Nav -->
+
+
+			<li class="nav-item"
+				sec:authorize="hasAnyAuthority('ADMINISTRADOR' , 'SECRETARIA','PACIENTE')"
+				th:fragment="navCitas"><a class="nav-link collapsed"
+				data-bs-target="#citas-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-calendar-week"></i><span>Citas</span><i
+					class="bi bi-chevron-down ms-auto"></i>
+			</a>
+				<ul id="citas-nav" class="nav-content collapse"
+					data-bs-parent="#sidebar-nav">
+
+					<li><a href="tables-data.html"
+						sec:authorize="hasAnyAuthority('ADMINISTRADOR' , 'SECRETARIA')"
+						th:href="@{/cita/listar}" class="active"> <i
+							class="bi bi-circle"></i><span>Gestionar</span>
+					</a></li>
+					<li><a href="tables-data.html"
+						sec:authorize="hasAnyAuthority('PACIENTE')"
+						th:href="@{/cita/listaPaciente}" class="active"> <i
+							class="bi bi-circle"></i><span>Mis Citas</span>
+					</a></li>
+
+				</ul></li>
+			<!-- End Tables Nav -->
+
+			<li class="nav-item"
+				sec:authorize="hasAnyAuthority('PACIENTE')"
+				th:fragment="navEnfermedades"><a class="nav-link collapsed"
+										  data-bs-target="#enfermedades-nav" data-bs-toggle="collapse" href="#">
+				<i class="bi bi-calendar-week"></i><span>Enfermedades</span><i
+					class="bi bi-chevron-down ms-auto"></i>
+			</a>
+				<ul id="enfermedades-nav" class="nav-content collapse"
+					data-bs-parent="#sidebar-nav">
+
+					<li><a href="tables-data.html"
+						   sec:authorize="hasAnyAuthority('PACIENTE')"
+						   th:href="@{/enfermedad/listar}" class="active"> <i
+							class="bi bi-circle"></i><span>Gestionar</span>
+					</a></li>
+
+				</ul></li>
+			<!-- End Tables Nav -->
+
+
+			<li class="nav-item"
+				sec:authorize="hasAnyAuthority('ADMINISTRADOR' , 'ALTAGERENCIA')"
+				th:fragment="navReportes"><a class="nav-link collapsed"
+				data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-bar-chart"></i><span>Reportes</span><i
+					class="bi bi-chevron-down ms-auto"></i>
+			</a>
+				<ul id="charts-nav" class="nav-content collapse "
+					data-bs-parent="#sidebar-nav">
+					<li><a href="charts-chartjs.html"
+						th:href="@{/reporte/todasCitasAtendidas}"> <i
+							class="bi bi-circle"></i><span>Citas Atendidas</span>
+					</a></li>
+					<li><a href="charts-apexcharts.html"
+						th:href="@{/reporte/todasCitasAgendadas}"> <i
+							class="bi bi-circle"></i><span>Citas Agendadas</span>
+					</a></li>
+					<li><a href="charts-echarts.html"
+						th:href="@{/grafica/grafica}"> <i class="bi bi-circle"></i><span>Gráfica
+								general</span>
+					</a></li>
+					<li><a href="charts-echarts.html" th:href="@{/grafica/cita}">
+							<i class="bi bi-circle"></i><span>Gráfica citas</span>
+					</a></li>
+					<li><a href="charts-echarts.html"
+						th:href="@{/grafica/atencion}"> <i class="bi bi-circle"></i><span>Gráfica
+								atenciones</span>
+					</a></li>
+				</ul></li>
+			<!-- End Charts Nav -->
+
+
+			<li class="nav-heading" th:fragment="navPerfil">Mis Datos</li>
+
+			<li class="nav-item"><a class="nav-link collapsed"
+				th:href="@{/persona/perfil}"> <i class="bi bi-person"></i> <span>Perfil</span>
+			</a></li>
+			<!-- End Profile Page Nav -->
+
+			<li class="nav-item"><a class="nav-link collapsed"
+			th:href="@{/contactenos}"> <i class="bi bi-envelope"></i> <span>Contactenos</span>
+			</a></li>
+			<!-- End Contact Page Nav -->
+
+		</ul>
+
+	</aside>
+	<!-- End Sidebar-->
+
+
+</body>
+
+<footer id="footer" class="footer" th:fragment="footer">
+	<div class="copyright">
+		&copy; Copyright <strong><span>Hospital</span></strong>. All Rights
+		Reserved
+	</div>
+	<!-- Vendor JS Files -->
+	<script th:src="@{/assets/vendor/apexcharts/apexcharts.min.js}"></script>
+	<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/assets/vendor/chart.js/chart.umd.js}"></script>
+	<script th:src="@{/assets/vendor/echarts/echarts.min.js}"></script>
+	<script th:src="@{/assets/vendor/quill/quill.min.js}"></script>
+	<script
+		th:src="@{/assets/vendor/simple-datatables/simple-datatables.js}"></script>
+	<script th:src="@{/assets/vendor/tinymce/tinymce.min.js}"></script>
+	<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+	<!-- Template Main JS File -->
+	<script th:src="@{/assets/js/main.js}"></script>
+
+	<script th:src="@{/assets/js/jquery.min.js}"></script>
+	<script th:src="@{/assets/js/sweetalert2.all.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"
+		integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script th:src="@{/assets/js/funciones.js}"></script>
+	<script th:src="@{/assets/js/jquery-ui.min.js}"></script>
+
+
+</footer>
+
+</html>
